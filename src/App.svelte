@@ -70,9 +70,6 @@
     <img src="images/exterior/2.webp">
     <img src="images/exterior/3.webp">
 
-
-
-
   </div>
 
 
