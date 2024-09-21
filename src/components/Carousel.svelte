@@ -1,13 +1,12 @@
-<script>
+<script lang="ts">
 </script>
 
 <div class="container">
     <div class="left">
-        <img style="overflow: hidden;" src="/images/house02.jpg" >
+        <img src="/images/house02.jpg" >
     </div>
     <div class="right">
         <img src="/images/house02.jpg" >
-
     </div>
 </div>
 

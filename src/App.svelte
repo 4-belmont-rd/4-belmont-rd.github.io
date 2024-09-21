@@ -1,32 +1,24 @@
 <script lang="ts">
-  import svelteLogo from "./assets/icons/svelte.svg";
   import Banner from "./components/Banner.svelte";
   import Card from './components/Card.svelte';
   import PriceCalculator from './components/PriceCalculator.svelte';
   import Carousel from './components/Carousel.svelte';
+  import Room from "./components/Room.svelte";
 </script>
 
 <main>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
+  <h1>4 Belmont Road</h1>
 
 
 
-  <Banner imageSrc="/images/house01.jpg" />
+  <Banner imageSrc="/images/exterior/1.webp" />
 
-  <Carousel />
+  <!-- <Carousel /> -->
 
   <div class="info-section">
     <div class="info-section-card">
       <Card>
-        Some texts
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium iste quis dicta dolores vitae eveniet ut, veritatis sunt deleniti quibusdam obcaecati laborum aut porro vero magni cum consequatur iure magnam!
       </Card>
     </div>
 
@@ -35,6 +27,52 @@
 
     </div>
   
+  </div>
+
+  <div>
+    <!-- <Room title="Living Room" /> -->
+
+    <h1>Living Room</h1>
+    <img src="images/living-room/1.webp">
+    <img src="images/living-room/2.webp">
+    <img src="images/living-room/3.webp">
+    <img src="images/living-room/4.webp">
+    <img src="images/living-room/5.webp">
+
+    <h1>Kitchen</h1>
+    <img src="images/kitchen/1.webp">
+    <img src="images/kitchen/2.webp">
+    <img src="images/kitchen/3.webp">
+
+    <h1>1st Bedroom</h1>
+    <img src="images/bedroom-1/1.webp">
+    <img src="images/bedroom-1/2.webp">
+
+    <h1>2nd Bedroom</h1>
+    <img src="images/bedroom-2/1.webp">
+
+    <h1>3rd Bedroom</h1>
+    <img src="images/bedroom-3/1.webp">
+    <img src="images/bedroom-3/2.webp">
+    <img src="images/bedroom-3/3.webp">
+    <img src="images/bedroom-3/4.webp">
+
+    <h1>Bathroom</h1>
+    <img src="images/bathroom/1.webp">
+    <img src="images/bathroom/2.webp">
+    <img src="images/bathroom/3.webp">
+
+    <h1>Workspace</h1>
+    <img src="images/workspace/1.webp">
+
+    <h1>Exterior</h1>
+    <img src="images/exterior/1.webp">
+    <img src="images/exterior/2.webp">
+    <img src="images/exterior/3.webp">
+
+
+
+
   </div>
 
 
