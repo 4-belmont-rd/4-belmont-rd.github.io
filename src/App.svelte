@@ -3,7 +3,6 @@
   import Card from './components/Card.svelte';
   import PriceCalculator from './components/PriceCalculator.svelte';
   import Carousel from './components/Carousel.svelte';
-  import Room from "./components/Room.svelte";
 </script>
 
 <main>
@@ -30,8 +29,6 @@
   </div>
 
   <div>
-    <!-- <Room title="Living Room" /> -->
-
     <h1>Living Room</h1>
     <img src="images/living-room/1.webp">
     <img src="images/living-room/2.webp">
@@ -70,7 +67,7 @@
     <img src="images/exterior/2.webp">
     <img src="images/exterior/3.webp">
 
-    
+
   </div>
 
 
