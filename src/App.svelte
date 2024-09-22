@@ -23,7 +23,6 @@
     <PriceCalculator/>
 
     </div>
-  
   </div>
 
   <div>
