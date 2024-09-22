@@ -8,7 +8,6 @@
 <main>
   <h1>4 Belmont Road</h1>
 
-
   <Banner imageSrc="/images/exterior/1.webp" />
 
   <!-- <Carousel /> -->
