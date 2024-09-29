@@ -14,6 +14,14 @@
 <style>
     .container {
         display: flex;
+        display: flex;
+        flex-direction: row;
+    }
+
+    @media (max-width: 800px) {
+        .container {
+            flex-direction: column;
+        }
     }
 
     .price-calculator {

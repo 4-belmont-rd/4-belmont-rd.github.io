@@ -15,7 +15,16 @@
   <div class="info-section">
     <div class="info-section-card">
       <Card>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium iste quis dicta dolores vitae eveniet ut, veritatis sunt deleniti quibusdam obcaecati laborum aut porro vero magni cum consequatur iure magnam!
+        <p>Traditional cottage within easy reach of the beach and town centre.</p>
+<p>Three bedroom cottage spread over 3 floors.<br/>
+  Bedroom 1 with double bed, bedroom 2 with petite double, attic bedroom with double bed (additional single bed can be requested in advance).
+  </p>
+
+<p>Fully equipped kitchen. Open plan living room with wood burner, fast WiFi and TV.</p>
+
+<p>11 minute walk from the beach, 9 minute walk from the station. Free on street parking.</p>
+
+<p>Town centre, many cafe’s, pubs and shops are all within a short walk.</p>
       </Card>
     </div>
 
@@ -63,20 +72,8 @@
     <img src="images/exterior/1.webp">
     <img src="images/exterior/2.webp">
     <img src="images/exterior/3.webp">
-
-
   </div>
 
-
-
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank"
-      >SvelteKit</a
-    >, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">Click on the Vite and Svelte logos to learn more</p>
 </main>
 
 <style>
