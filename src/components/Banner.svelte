@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Calendar from "./Calendar.svelte";
+    import Calendar from "./Calendar/Calendar.svelte";
     import PriceCalculator from "./PriceCalculator.svelte";
 
     export let imageSrc: string;

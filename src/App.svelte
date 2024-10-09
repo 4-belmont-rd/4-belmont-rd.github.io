@@ -3,7 +3,7 @@
   import Card from "./components/Card.svelte";
   import PriceCalculator from "./components/PriceCalculator.svelte";
   import Carousel from "./components/Carousel.svelte";
-    import Calendar from "./components/Calendar.svelte";
+    import Calendar from "./components/Calendar/Calendar.svelte";
 </script>
 
 <main>
