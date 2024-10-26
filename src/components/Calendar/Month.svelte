@@ -37,13 +37,17 @@
       }
     }
   
-    function isToday(day, month, year) { 
-      return (
-        day === today.getDate() &&
-        month === today.getMonth() &&
-        year === today.getFullYear()
-      );
-    }
+    function isBeforeToday(day: number, month: number, year: number): boolean { 
+    // Create a date object for the input day, month (adjusted for zero-indexed months), and year
+    const inputDate = new Date(year, month - 1, day);
+    
+    // Create a date object for today and set the hours, minutes, seconds, and ms to zero
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // Compare the two dates (ignoring time parts)
+    return inputDate.getTime() < today.getTime();
+}
 
     function isTaken(day, month, year) {
         let date = new Date(year, month, day);
@@ -71,7 +75,7 @@
 
     <!-- Days of the month -->
     {#each Array(getDaysInMonth(currentYear, currentMonth % 12)).fill(0).map((_, i) => i + 1) as day}
-      <div class="day">{day}</div>
+      <div class="day" class:taken={isBeforeToday(day, currentMonth, currentYear)}>{day}</div>
     {/each}
   </div>
 
