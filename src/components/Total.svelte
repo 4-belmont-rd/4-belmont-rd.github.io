@@ -5,14 +5,14 @@
     export let pricePerDay: number = 0;
     export let bookingFee: number = 0;
 
-    $: total = (days * pricePerDay) + bookingFee;
+    $: total = days * pricePerDay + bookingFee;
 </script>
 
 <div class="container">
     <Card>
         <div>
             <span class="left"> {days} x £{pricePerDay} </span>
-            <span class="right"> £{total} </span>
+            <span class="right"> £{days * pricePerDay} </span>
         </div>
         <div>
             <span class="left"> Booking fee </span>
