@@ -1,14 +1,13 @@
 <script lang="ts">
     export let title: string;
     export let value: string = "";
-    export let date: Date = new Date();
+    export let date: Date;
 
     $: {
         date = convertToDate(value);
     }
 
     function convertToDate(date: string): Date {
-        if (date == "") return new Date();
         return new Date(date);
     }
 </script>
