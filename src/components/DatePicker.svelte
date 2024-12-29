@@ -16,3 +16,13 @@
     <p>{title}</p>
     <input type="date" bind:value />
 </div>
+
+<style>
+    p {
+        margin: 0.3rem;
+    }
+
+    .container {
+        margin: 1rem;
+    }
+</style>

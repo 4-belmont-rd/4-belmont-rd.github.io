@@ -1,27 +1,21 @@
 <script lang="ts">
-    import Select from "@smui/select";
+    import Select, { Option } from "@smui/select";
 
+    export let label: string;
     export let items: string[] = [];
-    items = ["one", "two"];
 </script>
 
 <div class="container">
-    <!-- <Select bind:value label="Select Menu">
-            {#each fruits as fruit}
-              <Option value={fruit}>{fruit}</Option>
-            {/each}
-          </Select> -->
-<Select class="shaped-outlined" variant="outlined" label="Select Menu">
-    {#each items as item}
-        <p>{item}</p>
-    {/each}
-</Select>
-
+    <Select class="shaped-outlined" variant="outlined" {label}>
+        {#each items as item}
+            <Option value={item}>{item}</Option>
+        {/each}
+    </Select>
 </div>
 
 <style>
     .container {
         margin: 5%;
     }
-
 </style>
+

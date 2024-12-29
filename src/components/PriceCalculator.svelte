@@ -28,11 +28,11 @@
 <div class="container">
     <Card>
         <div class="content">
-            <p>Choose your stay</p>
+            <h3>Choose your stay</h3>
             <DatePicker title="From" bind:date={fromDate} />
             <DatePicker title="To" bind:date={toDate} />
 
-            <SelectField />
+            <SelectField label="Guests" items={["1", "2", "3", "4"]} />
 
             {#if days > 0}
                 <div class="total">
@@ -40,7 +40,7 @@
                 </div>
             {/if}
 
-            <Fab color="secondary" extended>something else</Fab>
+            <Fab color="secondary" extended>Reserve</Fab>
         </div>
     </Card>
 </div>
@@ -51,7 +51,7 @@
     }
 
     .content {
-        /* padding: 10% 0; */
+        padding: 5% 0;
     }
 
     .total {
