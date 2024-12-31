@@ -26,7 +26,7 @@
 </script>
 
 <div class="container">
-    <Card>
+    <Card shadow={true}>
         <div class="content">
             <h3>Choose your stay</h3>
             <DatePicker title="From" bind:date={fromDate} />
