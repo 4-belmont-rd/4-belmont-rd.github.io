@@ -5,50 +5,54 @@
     export let imageSrc: string;
 </script>
 
-<div class="container">
+<div class="container" style="background-image: url({imageSrc});">
     <div class="price-calculator">
         <PriceCalculator />
     </div>
-    <div class="calendar"><Calendar></Calendar></div>
-
-    <img src={imageSrc} alt="" />
+    <div class="calendar">
+        <Calendar />
+    </div>
 </div>
 
 <style>
     .container {
         display: flex;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    }
-
-    @media (max-width: 800px) {
-        .container {
-            flex-direction: column;
-        }
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        min-height: 100vh;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: 2rem;
+        box-sizing: border-box;
     }
 
     .price-calculator {
-        position: absolute;
-        padding: 5%;
-        max-width: 1280px;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-        padding: 2rem;
-        text-align: center;
+        width: 100%;
+        padding: 1rem;
     }
 
     .calendar {
-        position: absolute;
-        background: white;
-        bottom: 1rem;
-        left: 0;
-        right: 0;
-        margin: auto;
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 2rem;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 1rem;
+        border-radius: 8px;
         text-align: center;
+    }
+
+    @media (min-width: 800px) {
+        .container {
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .price-calculator {
+            align-self: flex-start;
+        }
+
+        .calendar {
+            margin-top: 1rem;
+        }
     }
 </style>

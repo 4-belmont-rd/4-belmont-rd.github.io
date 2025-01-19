@@ -15,7 +15,6 @@
 <div class="container">
     <p>{title}</p>
     <input type="date" bind:value min={today} />
-    <p>Selected date: {value}</p>
 </div>
 
 <style>
