@@ -108,6 +108,7 @@
   .info-section {
     display: flex;
     padding: 0 5%;
+    margin-top: 0.7rem;
   }
 
   .info-section-card {

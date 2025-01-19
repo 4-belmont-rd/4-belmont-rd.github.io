@@ -26,6 +26,7 @@
         background-repeat: no-repeat;
         padding: 2rem;
         box-sizing: border-box;
+        margin-bottom: 1rem;
     }
 
     .price-calculator {
