@@ -71,14 +71,14 @@
     }
 
     .large {
-        width: 10%;
+        width: 50%;
         height: 100%;
         object-fit: cover;
         padding-right: 5px;
     }
 
     .small-images {
-        width: 90%;
+        width: 50%;
         display: flex;
         flex-wrap: wrap;
         gap: 5px;
@@ -87,28 +87,6 @@
     .small-images img {
         width: calc(50% - 5px);
         height: 50%;
-        object-fit: cover;
-    }
-
-    .grid-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        width: 100%;
-        height: 400px;
-        gap: 5px;
-    }
-
-    .large {
-        grid-row: span 2;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .small {
-        width: 100%;
-        height: 100%;
         object-fit: cover;
     }
 </style>
