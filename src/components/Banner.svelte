@@ -56,4 +56,10 @@
             margin-top: 1rem;
         }
     }
+
+    @media (max-width: 800px) {
+        .container {
+            background-size: contain;
+        }
+    }
 </style>

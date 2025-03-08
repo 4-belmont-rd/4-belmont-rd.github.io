@@ -1,35 +1,53 @@
-<script lang="ts">
+<script>
+    export let images = [];
+    let currentIndex = 0;
+
+    function next() {
+        currentIndex = (currentIndex + 1) % images.length;
+    }
+
+    function prev() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+    }
 </script>
 
-<div class="container">
-    <div class="left">
-        <img src="/images/house02.jpg" >
-    </div>
-    <div class="right">
-        <img src="/images/house02.jpg" >
-    </div>
+<div class="carousel">
+    <button on:click={prev} class="prev">&#9665;</button>
+    <img src={images[currentIndex]} alt="Carousel Image" class="image" />
+    <button on:click={next} class="next">&#9655;</button>
 </div>
 
 <style>
-    .container {
+    .carousel {
         display: flex;
-        justify-content: space-around;
-        margin: 5%;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: 50rem;
+        height: 40rem;
     }
 
-    .half {
-        width: 40vw;
+    .image {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 8px;
     }
 
-    img {
-        width: inherit;
+    .prev,
+    .next {
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        position: absolute;
     }
 
-    .left {
-        width: 40vw;
+    .prev {
+        left: 10px;
     }
 
-    .right {
-        width: 40vw;
+    .next {
+        right: 10px;
     }
 </style>
