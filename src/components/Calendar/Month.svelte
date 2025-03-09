@@ -159,7 +159,11 @@
   .day {
     padding: 10px;
     cursor: pointer;
+    justify-content: center;
+    aspect-ratio: 1;
+    width: 30px;
   }
+
   .day:hover {
     background-color: #018786;
     color: white;
