@@ -26,7 +26,6 @@ export async function fetchBookedDates(): Promise<Date[]> {
   }));
 
   let takenDates = getDatesBetween(combined)
-  console.log("taken", combined, takenDates)
   return takenDates;
 
 }

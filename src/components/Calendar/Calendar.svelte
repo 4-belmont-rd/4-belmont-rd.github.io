@@ -1,8 +1,9 @@
 <script lang="ts">
   import Month from "./Month.svelte";
-  import type { DateRange } from "src/services/airbnb";
 
   export var bookedDates: Date[] = [];
+  export let startDate: Date;
+  export let endDate: Date;
 
   let today = new Date();
   let currentMonth = today.getMonth();
@@ -26,9 +27,22 @@
 </div>
 
 <div class="calendar-wrapper">
-  <Month {currentMonth} {bookedDates}></Month>
-  <Month currentMonth={currentMonth + 1} {bookedDates}></Month>
-  <Month currentMonth={currentMonth + 2} {bookedDates}></Month>
+  <Month {currentMonth} {bookedDates} {startDate} {endDate} on:dateSelected
+  ></Month>
+  <Month
+    currentMonth={currentMonth + 1}
+    {bookedDates}
+    {startDate}
+    {endDate}
+    on:dateSelected
+  ></Month>
+  <Month
+    currentMonth={currentMonth + 2}
+    {bookedDates}
+    {startDate}
+    {endDate}
+    on:dateSelected
+  ></Month>
 </div>
 
 <style>

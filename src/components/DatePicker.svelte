@@ -5,7 +5,12 @@
 
     const today = new Date().toISOString().split("T")[0];
 
-    $: date = convertToDate(value);
+    //$: date = convertToDate(value);
+    $: value = date
+        ? new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+              .toISOString()
+              .split("T")[0]
+        : "";
 
     function convertToDate(date: string): Date {
         return new Date(date);

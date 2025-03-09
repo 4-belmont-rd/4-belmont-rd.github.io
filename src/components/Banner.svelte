@@ -4,14 +4,16 @@
 
     export let imageSrc: string;
     export let bookedDates: Date[] = [];
+    export let startDate: Date;
+    export let endDate: Date;
 </script>
 
 <div class="container" style="background-image: url({imageSrc});">
     <div class="price-calculator">
-        <PriceCalculator />
+        <PriceCalculator fromDate={startDate} toDate={endDate} />
     </div>
     <div class="calendar">
-        <Calendar {bookedDates} />
+        <Calendar {bookedDates} {startDate} {endDate} on:dateSelected />
     </div>
 </div>
 

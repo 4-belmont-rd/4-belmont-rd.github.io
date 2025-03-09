@@ -10,15 +10,40 @@
 
   let bookedDates: Date[] = [];
 
+  let selectedStartDate: Date;
+  let selectedEndDate: Date;
+
+  $: console.log("start", selectedStartDate, "end", selectedEndDate);
+
   onMount(async () => {
     bookedDates = await fetchBookedDates();
   });
+
+  function onDateSelected(date: Date) {
+    if (date == null) return;
+    if (selectedStartDate == null && selectedEndDate == null) {
+      selectedStartDate = date;
+      return;
+    }
+    if (date.getTime() < selectedStartDate.getTime()) {
+      //selectedEndDate = selectedStartDate;
+      selectedStartDate = date;
+    } else {
+      selectedEndDate = date;
+    }
+  }
 </script>
 
 <main>
   <h1>4 Belmont Road</h1>
 
-  <Banner imageSrc="/images/exterior/1.webp" {bookedDates} />
+  <Banner
+    imageSrc="/images/exterior/1.webp"
+    {bookedDates}
+    startDate={selectedStartDate}
+    endDate={selectedEndDate}
+    on:dateSelected={(event) => onDateSelected(event.detail)}
+  />
 
   <div class="info-section">
     <div class="info-section-card">
@@ -49,11 +74,20 @@
     </div>
 
     <div class="info-section-price-calculator">
-      <PriceCalculator shadow={false} />
+      <PriceCalculator
+        shadow={false}
+        fromDate={selectedStartDate}
+        toDate={selectedEndDate}
+      />
     </div>
   </div>
 
-  <Calendar {bookedDates}></Calendar>
+  <Calendar
+    {bookedDates}
+    startDate={selectedStartDate}
+    endDate={selectedEndDate}
+    on:dateSelected={(event) => onDateSelected(event.detail)}
+  ></Calendar>
   <RoomsImageList />
 </main>
 

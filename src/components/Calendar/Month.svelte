@@ -12,7 +12,9 @@
   let currentYear = today.getFullYear();
   let takenDates: Date[] = [new Date(2025, 3, 3), new Date(2025, 3, 9)];
   $: takenDates = bookedDates;
-  let startDate: Date;
+
+  export let startDate: Date;
+  export let endDate: Date;
 
   if (addMonths > 0) currentMonth += addMonths;
 
@@ -71,14 +73,14 @@
   }
 
   function dateSelected(date: Date) {
-    startDate = date;
     dispatch("dateSelected", date);
   }
 
   function isSelected(day: number, month: number, year: number) {
     const inputDate = new Date(year, month, day);
     let x = startDate?.getTime() == inputDate.getTime();
-    return x;
+    let y = endDate?.getTime() == inputDate.getTime();
+    return x || y;
   }
 </script>
 
@@ -103,19 +105,24 @@
 
   <!-- Days of the month -->
   {#key takenDates}
-    {#each Array(getDaysInMonth(currentYear, currentMonth % 12))
-      .fill(0)
-      .map((_, i) => i + 1) as day}
-      <div
-        class="day"
-        class:taken={isTaken(day, currentMonth, currentYear)}
-        class:today={isToday(day, currentMonth, currentYear)}
-        class:selected={isSelected(day, currentMonth, currentYear)}
-        on:click={() => dateSelected(new Date(currentYear, currentMonth, day))}
-      >
-        {day}
-      </div>
-    {/each}
+    {#key startDate}
+      {#key endDate}
+        {#each Array(getDaysInMonth(currentYear, currentMonth % 12))
+          .fill(0)
+          .map((_, i) => i + 1) as day}
+          <div
+            class="day"
+            class:taken={isTaken(day, currentMonth, currentYear)}
+            class:today={isToday(day, currentMonth, currentYear)}
+            class:selected={isSelected(day, currentMonth, currentYear)}
+            on:click={() =>
+              dateSelected(new Date(currentYear, currentMonth, day))}
+          >
+            {day}
+          </div>
+        {/each}
+      {/key}
+    {/key}
   {/key}
 </div>
 
@@ -143,16 +150,16 @@
     border-radius: 50%;
   }
 
-  .today {
-    background-color: #018786;
-    color: white;
-    opacity: 50%;
-    border-radius: 50%;
-  }
-
   .taken {
     color: grey;
     opacity: 50%;
+  }
+
+  .today {
+    background-color: grey;
+    color: white;
+    opacity: 50%;
+    border-radius: 50%;
   }
 
   .selected {
