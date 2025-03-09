@@ -15,7 +15,6 @@
 
 <style>
     .container {
-        margin: 5%;
+        margin-bottom: 1rem;
     }
 </style>
-

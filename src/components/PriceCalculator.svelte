@@ -4,6 +4,7 @@
     import DatePicker from "./DatePicker.svelte";
     import SelectField from "./SelectField.svelte";
     import Total from "./Total.svelte";
+    import { createEventDispatcher } from "svelte";
 
     export let days: number = 0;
     export let pricePerDay: number = 120;
@@ -12,6 +13,8 @@
 
     export let fromDate: Date = null;
     export let toDate: Date = null;
+
+    const dispatch = createEventDispatcher();
 
     $: days = calculateDays(fromDate, toDate);
 
@@ -30,8 +33,16 @@
     <Card {shadow}>
         <div class="content">
             <h3>Choose your stay</h3>
-            <DatePicker title="From" bind:date={fromDate} />
-            <DatePicker title="To" bind:date={toDate} />
+            <DatePicker
+                title="From"
+                date={fromDate}
+                on:datePickerChanged={(event) => (fromDate = event.detail)}
+            />
+            <DatePicker
+                title="To"
+                date={toDate}
+                on:datePickerChanged={(event) => (toDate = event.detail)}
+            />
 
             <SelectField label="Guests" items={["1", "2", "3", "4"]} />
 

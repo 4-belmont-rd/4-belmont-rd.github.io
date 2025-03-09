@@ -76,8 +76,8 @@
     <div class="info-section-price-calculator">
       <PriceCalculator
         shadow={false}
-        fromDate={selectedStartDate}
-        toDate={selectedEndDate}
+        bind:fromDate={selectedStartDate}
+        bind:toDate={selectedEndDate}
       />
     </div>
   </div>

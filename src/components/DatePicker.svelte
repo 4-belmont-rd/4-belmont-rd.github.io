@@ -1,8 +1,10 @@
 <script lang="ts">
+    import { createEventDispatcher } from "svelte";
     export let title: string;
     export let value: string = "";
     export let date: Date;
 
+    const dispatch = createEventDispatcher();
     const today = new Date().toISOString().split("T")[0];
 
     //$: date = convertToDate(value);
@@ -19,7 +21,12 @@
 
 <div class="container">
     <p>{title}</p>
-    <input type="date" bind:value min={today} />
+    <input
+        type="date"
+        bind:value
+        min={today}
+        on:change={() => dispatch("datePickerChanged", new Date(value))}
+    />
 </div>
 
 <style>
