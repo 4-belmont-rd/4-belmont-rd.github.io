@@ -82,6 +82,15 @@
     let y = endDate?.getTime() == inputDate.getTime();
     return x || y;
   }
+
+  function isBetween(day: number, month: number, year: number): boolean {
+    if (startDate == null || endDate == null) return false;
+    const inputDate = new Date(year, month, day);
+    return (
+      inputDate.getTime() > startDate.getTime() &&
+      inputDate.getTime() < endDate.getTime()
+    );
+  }
 </script>
 
 <div class="calendar">
@@ -115,7 +124,14 @@
             class:taken={isTaken(day, currentMonth, currentYear)}
             class:today={isToday(day, currentMonth, currentYear)}
             class:selected={isSelected(day, currentMonth, currentYear)}
+            class:between={isBetween(day, currentMonth, currentYear)}
             on:click={() =>
+              dateSelected(new Date(currentYear, currentMonth, day))}
+            on:keydown={() =>
+              dateSelected(new Date(currentYear, currentMonth, day))}
+            on:keyup={() =>
+              dateSelected(new Date(currentYear, currentMonth, day))}
+            on:keypress={() =>
               dateSelected(new Date(currentYear, currentMonth, day))}
           >
             {day}
@@ -165,6 +181,12 @@
   .selected {
     background-color: #018786;
     color: white;
+    border-radius: 50%;
+  }
+
+  .between {
+    color: white;
+    background-color: #018786;
     opacity: 50%;
     border-radius: 50%;
   }
