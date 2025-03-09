@@ -1,15 +1,24 @@
 <script lang="ts">
+  import { fetchBookedDates } from "./services/airbnb";
+  import { onMount } from "svelte";
+
   import Banner from "./components/Banner.svelte";
   import Card from "./components/Card.svelte";
   import PriceCalculator from "./components/PriceCalculator.svelte";
   import Calendar from "./components/Calendar/Calendar.svelte";
   import RoomsImageList from "./components/RoomsImageList.svelte";
+
+  let bookedDates: Date[] = [];
+
+  onMount(async () => {
+    bookedDates = await fetchBookedDates();
+  });
 </script>
 
 <main>
   <h1>4 Belmont Road</h1>
 
-  <Banner imageSrc="/images/exterior/1.webp" />
+  <Banner imageSrc="/images/exterior/1.webp" {bookedDates} />
 
   <div class="info-section">
     <div class="info-section-card">
@@ -40,34 +49,20 @@
     </div>
 
     <div class="info-section-price-calculator">
-      <PriceCalculator />
+      <PriceCalculator shadow={false} />
     </div>
   </div>
 
-  <Calendar></Calendar>
+  <Calendar {bookedDates}></Calendar>
   <RoomsImageList />
 </main>
 
 <style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
-  }
-
   .info-section {
     display: flex;
     padding: 0 5%;
     margin-top: 0.7rem;
+    margin-bottom: 2rem;
   }
 
   .info-section-card {
@@ -76,5 +71,6 @@
 
   .info-section-price-calculator {
     flex-grow: 1;
+    margin-left: 1rem;
   }
 </style>

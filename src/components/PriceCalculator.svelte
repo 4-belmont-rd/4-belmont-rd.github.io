@@ -8,9 +8,10 @@
     export let days: number = 0;
     export let pricePerDay: number = 120;
     export let bookingFee: number = 12.5;
+    export let shadow: boolean = true;
 
-    let fromDate: Date;
-    let toDate: Date;
+    export let fromDate: Date = null;
+    export let toDate: Date = null;
 
     $: days = calculateDays(fromDate, toDate);
 
@@ -26,7 +27,7 @@
 </script>
 
 <div class="container">
-    <Card shadow={true}>
+    <Card {shadow}>
         <div class="content">
             <h3>Choose your stay</h3>
             <DatePicker title="From" bind:date={fromDate} />

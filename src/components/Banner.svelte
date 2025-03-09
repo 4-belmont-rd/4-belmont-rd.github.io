@@ -3,6 +3,7 @@
     import PriceCalculator from "./PriceCalculator.svelte";
 
     export let imageSrc: string;
+    export let bookedDates: Date[] = [];
 </script>
 
 <div class="container" style="background-image: url({imageSrc});">
@@ -10,7 +11,7 @@
         <PriceCalculator />
     </div>
     <div class="calendar">
-        <Calendar />
+        <Calendar {bookedDates} />
     </div>
 </div>
 

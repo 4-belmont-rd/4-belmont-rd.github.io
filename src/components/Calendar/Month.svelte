@@ -1,10 +1,18 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
+
   export let addMonths: number = 0;
+  export var bookedDates: Date[] = [];
 
   let today = new Date();
   export let currentMonth = today.getMonth();
+
+  const dispatch = createEventDispatcher();
+
   let currentYear = today.getFullYear();
   let takenDates: Date[] = [new Date(2025, 3, 3), new Date(2025, 3, 9)];
+  $: takenDates = bookedDates;
+  let startDate: Date;
 
   if (addMonths > 0) currentMonth += addMonths;
 
@@ -61,6 +69,17 @@
     });
     return condition;
   }
+
+  function dateSelected(date: Date) {
+    startDate = date;
+    dispatch("dateSelected", date);
+  }
+
+  function isSelected(day: number, month: number, year: number) {
+    const inputDate = new Date(year, month, day);
+    let x = startDate?.getTime() == inputDate.getTime();
+    return x;
+  }
 </script>
 
 <div class="calendar">
@@ -83,17 +102,21 @@
   {/each}
 
   <!-- Days of the month -->
-  {#each Array(getDaysInMonth(currentYear, currentMonth % 12))
-    .fill(0)
-    .map((_, i) => i + 1) as day}
-    <div
-      class="day"
-      class:taken={isTaken(day, currentMonth, currentYear)}
-      class:today={isToday(day, currentMonth, currentYear)}
-    >
-      {day}
-    </div>
-  {/each}
+  {#key takenDates}
+    {#each Array(getDaysInMonth(currentYear, currentMonth % 12))
+      .fill(0)
+      .map((_, i) => i + 1) as day}
+      <div
+        class="day"
+        class:taken={isTaken(day, currentMonth, currentYear)}
+        class:today={isToday(day, currentMonth, currentYear)}
+        class:selected={isSelected(day, currentMonth, currentYear)}
+        on:click={() => dateSelected(new Date(currentYear, currentMonth, day))}
+      >
+        {day}
+      </div>
+    {/each}
+  {/key}
 </div>
 
 <style>
@@ -112,16 +135,30 @@
 
   .day {
     padding: 10px;
+    cursor: pointer;
+  }
+  .day:hover {
+    background-color: #018786;
+    color: white;
+    border-radius: 50%;
   }
 
   .today {
-    background-color: #3498db;
+    background-color: #018786;
     color: white;
+    opacity: 50%;
     border-radius: 50%;
   }
 
   .taken {
     color: grey;
     opacity: 50%;
+  }
+
+  .selected {
+    background-color: #018786;
+    color: white;
+    opacity: 50%;
+    border-radius: 50%;
   }
 </style>

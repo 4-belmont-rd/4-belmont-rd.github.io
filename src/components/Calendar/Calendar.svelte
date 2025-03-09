@@ -1,11 +1,13 @@
 <script lang="ts">
   import Month from "./Month.svelte";
+  import type { DateRange } from "src/services/airbnb";
+
+  export var bookedDates: Date[] = [];
 
   let today = new Date();
   let currentMonth = today.getMonth();
   let currentYear = today.getFullYear();
 
-  // Function to handle month navigation
   function changeMonth(delta) {
     currentMonth += delta;
     if (currentMonth < 0) {
@@ -24,9 +26,9 @@
 </div>
 
 <div class="calendar-wrapper">
-  <Month {currentMonth}></Month>
-  <Month currentMonth={currentMonth + 1}></Month>
-  <Month currentMonth={currentMonth + 2}></Month>
+  <Month {currentMonth} {bookedDates}></Month>
+  <Month currentMonth={currentMonth + 1} {bookedDates}></Month>
+  <Month currentMonth={currentMonth + 2} {bookedDates}></Month>
 </div>
 
 <style>
