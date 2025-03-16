@@ -1,9 +1,31 @@
 <script lang="ts">
+    import Modal from "./Modal.svelte";
+    import RoomsImageCarousel from "./RoomsImageCarousel.svelte";
+
+    let showModal = false;
+
+    function imageClicked() {
+        openModal();
+    }
+
+    function openModal() {
+        showModal = true;
+    }
+
+    function closeModal() {
+        showModal = false;
+    }
 </script>
 
 <div>
+    {#if showModal}
+        <Modal onClose={closeModal}>
+            <RoomsImageCarousel />
+        </Modal>
+    {/if}
+
     <h1>Living Room</h1>
-    <div class="gallery">
+    <div class="gallery" on:click={imageClicked}>
         <img class="large" src="images/living-room/1.webp" />
         <div class="small-images">
             <img src="images/living-room/2.webp" />

@@ -23,8 +23,9 @@
         align-items: center;
         justify-content: center;
         position: relative;
-        width: 50rem;
-        height: 40rem;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
     }
 
     .image {
@@ -41,6 +42,8 @@
         padding: 10px;
         cursor: pointer;
         position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
     }
 
     .prev {
