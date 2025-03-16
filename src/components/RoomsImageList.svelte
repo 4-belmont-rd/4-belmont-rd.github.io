@@ -3,8 +3,14 @@
     import RoomsImageCarousel from "./RoomsImageCarousel.svelte";
 
     let showModal = false;
+    let selectedImageUrl;
 
-    function imageClicked() {
+    function imageClicked(event) {
+        console.log(
+            "hey",
+            event.target?.src.replace(event.target?.baseURI, ""),
+        );
+        selectedImageUrl = event.target?.src.replace(event.target?.baseURI, "");
         openModal();
     }
 
@@ -20,12 +26,12 @@
 <div>
     {#if showModal}
         <Modal onClose={closeModal}>
-            <RoomsImageCarousel />
+            <RoomsImageCarousel imageUrl={selectedImageUrl} />
         </Modal>
     {/if}
 
     <h1>Living Room</h1>
-    <div class="gallery" on:click={imageClicked}>
+    <div class="gallery" on:click={(event) => imageClicked(event)}>
         <img class="large" src="images/living-room/1.webp" />
         <div class="small-images">
             <img src="images/living-room/2.webp" />
@@ -36,7 +42,7 @@
     </div>
 
     <h1>Kitchen</h1>
-    <div class="gallery" on:click={imageClicked}>
+    <div class="gallery" on:click={(event) => imageClicked(event)}>
         <img class="large" src="images/kitchen/1.webp" />
         <div class="small-images">
             <img src="images/kitchen/2.webp" />
@@ -45,16 +51,19 @@
     </div>
 
     <h1>1st Bedroom</h1>
-    <div class="gallery" on:click={imageClicked}>
+    <div class="gallery" on:click={(event) => imageClicked(event)}>
         <img class="large" src="images/bedroom-1/1.webp" />
         <img class="small-images" src="images/bedroom-1/2.webp" />
     </div>
 
     <h1>2nd Bedroom</h1>
-    <img src="images/bedroom-2/1.webp" on:click={imageClicked} />
+    <img
+        src="images/bedroom-2/1.webp"
+        on:click={(event) => imageClicked(event)}
+    />
 
     <h1>3rd Bedroom</h1>
-    <div class="gallery" on:click={imageClicked}>
+    <div class="gallery" on:click={(event) => imageClicked(event)}>
         <img class="large" src="images/bedroom-3/1.webp" />
         <div class="small-images">
             <img src="images/bedroom-3/2.webp" />
@@ -64,7 +73,7 @@
     </div>
 
     <h1>Bathroom</h1>
-    <div class="gallery" on:click={imageClicked}>
+    <div class="gallery" on:click={(event) => imageClicked(event)}>
         <img class="large" src="images/bathroom/1.webp" />
         <div class="small-images">
             <img src="images/bathroom/2.webp" />
@@ -73,10 +82,13 @@
     </div>
 
     <h1>Workspace</h1>
-    <img src="images/workspace/1.webp" on:click={imageClicked} />
+    <img
+        src="images/workspace/1.webp"
+        on:click={(event) => imageClicked(event)}
+    />
 
     <h1>Exterior</h1>
-    <div class="gallery" on:click={imageClicked}>
+    <div class="gallery" on:click={(event) => imageClicked(event)}>
         <img class="large" src="images/exterior/1.webp" />
         <div class="small-images">
             <img src="images/exterior/2.webp" />

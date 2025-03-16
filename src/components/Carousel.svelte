@@ -1,6 +1,6 @@
 <script>
     export let images = [];
-    let currentIndex = 0;
+    export let currentIndex = 0;
 
     function next() {
         currentIndex = (currentIndex + 1) % images.length;
