@@ -45,10 +45,18 @@
         text-align: center;
     }
 
+    @media (max-width: 800px) {
+        .price-calculator {
+            display: none;
+        }
+
+        .calendar {
+            display: none;
+        }
+    }
+
     @media (min-width: 800px) {
         .container {
-            flex-direction: column;
-            justify-content: flex-start;
             background-size: contain;
         }
 

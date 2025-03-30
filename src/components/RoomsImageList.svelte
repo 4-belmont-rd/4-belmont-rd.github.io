@@ -6,10 +6,6 @@
     let selectedImageUrl;
 
     function imageClicked(event) {
-        console.log(
-            "hey",
-            event.target?.src.replace(event.target?.baseURI, ""),
-        );
         selectedImageUrl = event.target?.src.replace(event.target?.baseURI, "");
         openModal();
     }
@@ -122,5 +118,9 @@
         width: calc(50% - 5px);
         height: 50%;
         object-fit: cover;
+    }
+
+    img {
+        cursor: pointer;
     }
 </style>
