@@ -46,6 +46,13 @@
     }
 
     @media (max-width: 800px) {
+        .container {
+            width: 100%;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+        }
+
         .price-calculator {
             display: none;
         }
@@ -58,6 +65,7 @@
     @media (min-width: 800px) {
         .container {
             background-size: contain;
+            background-position: center;
         }
 
         .price-calculator {
