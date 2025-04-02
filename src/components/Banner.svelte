@@ -48,7 +48,8 @@
     @media (max-width: 800px) {
         .container {
             width: 100dvw;
-            height: 100dvh;
+            height: 60dvh;
+            min-height: unset;
             background-size: cover;
             background-position: center;
         }

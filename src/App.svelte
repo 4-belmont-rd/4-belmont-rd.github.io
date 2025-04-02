@@ -7,13 +7,12 @@
   import PriceCalculator from "./components/PriceCalculator.svelte";
   import Calendar from "./components/Calendar/Calendar.svelte";
   import RoomsImageList from "./components/RoomsImageList.svelte";
+  import RoomsImageCarousel from "./components/RoomsImageCarousel.svelte";
 
   let bookedDates: Date[] = [];
 
   let selectedStartDate: Date;
   let selectedEndDate: Date;
-
-  $: console.log("start", selectedStartDate, "end", selectedEndDate);
 
   onMount(async () => {
     bookedDates = await fetchBookedDates();
@@ -35,15 +34,23 @@
 </script>
 
 <main>
-  <h1>4 Belmont Road</h1>
+  <div class="title">
+    <h1>4 Belmont Road</h1>
+  </div>
 
-  <Banner
-    imageSrc="/images/exterior/1.webp"
-    {bookedDates}
-    startDate={selectedStartDate}
-    endDate={selectedEndDate}
-    on:dateSelected={(event) => onDateSelected(event.detail)}
-  />
+  <div class="mobile-only carousel">
+    <RoomsImageCarousel imageUrl={"images/exterior/1.webp"} />
+  </div>
+
+  <div class="hide-on-mobile">
+    <Banner
+      imageSrc="/images/exterior/1.webp"
+      {bookedDates}
+      startDate={selectedStartDate}
+      endDate={selectedEndDate}
+      on:dateSelected={(event) => onDateSelected(event.detail)}
+    />
+  </div>
 
   <div class="info-section">
     <div class="info-section-card">
@@ -82,13 +89,15 @@
     </div>
   </div>
 
-  <Calendar
-    {bookedDates}
-    startDate={selectedStartDate}
-    endDate={selectedEndDate}
-    on:dateSelected={(event) => onDateSelected(event.detail)}
-  ></Calendar>
-  <RoomsImageList />
+  <div class="hide-on-mobile">
+    <Calendar
+      {bookedDates}
+      startDate={selectedStartDate}
+      endDate={selectedEndDate}
+      on:dateSelected={(event) => onDateSelected(event.detail)}
+    ></Calendar>
+    <RoomsImageList />
+  </div>
 </main>
 
 <style>
@@ -106,5 +115,34 @@
   .info-section-price-calculator {
     flex-grow: 1;
     margin-left: 1rem;
+  }
+
+  @media (max-width: 800px) {
+    .hide-on-mobile,
+    .info-section-price-calculator {
+      display: none;
+    }
+
+    .title {
+      font-size: 0.5rem;
+    }
+
+    .info-section-card {
+      color: #213547;
+    }
+
+    p {
+      margin: 0.5rem;
+    }
+
+    .carousel {
+      height: 70vh;
+    }
+  }
+
+  @media (min-width: 801px) {
+    .mobile-only {
+      display: none;
+    }
   }
 </style>
