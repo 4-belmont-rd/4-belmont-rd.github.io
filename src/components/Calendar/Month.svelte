@@ -151,6 +151,13 @@
     margin: 10px;
   }
 
+  @media (max-width: 800px) {
+    .calendar {
+      margin: 0 auto;
+      margin-bottom: 2rem;
+    }
+  }
+
   .header {
     text-align: center;
     margin-bottom: 10px;
@@ -162,6 +169,12 @@
     justify-content: center;
     aspect-ratio: 1;
     width: 30px;
+  }
+
+  @media (max-width: 800px) {
+    .day {
+      width: 20px;
+    }
   }
 
   .day:hover {

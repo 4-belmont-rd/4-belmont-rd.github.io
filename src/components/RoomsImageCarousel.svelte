@@ -32,7 +32,6 @@
 
     if (imageUrl) {
         selectedImageIndex = images_livingRoom.indexOf(imageUrl);
-        console.log("ciccio", selectedImageIndex);
     }
 </script>
 

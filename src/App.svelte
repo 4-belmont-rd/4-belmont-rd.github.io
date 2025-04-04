@@ -89,13 +89,13 @@
     </div>
   </div>
 
+  <Calendar
+    {bookedDates}
+    startDate={selectedStartDate}
+    endDate={selectedEndDate}
+    on:dateSelected={(event) => onDateSelected(event.detail)}
+  ></Calendar>
   <div class="hide-on-mobile">
-    <Calendar
-      {bookedDates}
-      startDate={selectedStartDate}
-      endDate={selectedEndDate}
-      on:dateSelected={(event) => onDateSelected(event.detail)}
-    ></Calendar>
     <RoomsImageList />
   </div>
 </main>
