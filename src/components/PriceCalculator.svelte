@@ -69,4 +69,16 @@
     .total {
         margin: 5% 0;
     }
+
+    @media (max-width: 800px) {
+        .container {
+            justify-content: center;
+            margin-bottom: 2rem;
+            color: #213547;
+        }
+
+        .content {
+            width: 70vw;
+        }
+    }
 </style>

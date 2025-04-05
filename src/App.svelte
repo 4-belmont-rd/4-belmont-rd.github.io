@@ -14,9 +14,17 @@
   let selectedStartDate: Date;
   let selectedEndDate: Date;
 
+  let isMobile = window.innerWidth <= 800;
+
   onMount(async () => {
     bookedDates = await fetchBookedDates();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   });
+
+  function handleResize() {
+    isMobile = window.innerWidth <= 800;
+  }
 
   function onDateSelected(date: Date) {
     if (date == null) return;
@@ -95,6 +103,13 @@
     endDate={selectedEndDate}
     on:dateSelected={(event) => onDateSelected(event.detail)}
   ></Calendar>
+  {#if isMobile}
+    <PriceCalculator
+      shadow={false}
+      bind:fromDate={selectedStartDate}
+      bind:toDate={selectedEndDate}
+    />
+  {/if}
   <div class="hide-on-mobile">
     <RoomsImageList />
   </div>

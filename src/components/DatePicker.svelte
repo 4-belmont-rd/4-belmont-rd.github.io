@@ -47,4 +47,10 @@
         background-color: #f9f9f9;
         cursor: pointer;
     }
+
+    @media (max-width: 800px) {
+        p {
+            color: #213547;
+        }
+    }
 </style>
