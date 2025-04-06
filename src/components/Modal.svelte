@@ -55,4 +55,10 @@
         cursor: pointer;
         z-index: 1;
     }
+
+    @media (max-width: 800px) {
+        .modal {
+            height: 84vh;
+        }
+    }
 </style>
