@@ -17,9 +17,10 @@
     export let toDate: Date = null;
 
     const dispatch = createEventDispatcher();
+    let form;
     let showModal = true;
-    let textValue = "";
-    let emailAddress = "";
+    let message = "";
+    let email = "";
     let phone = "";
     let guests;
 
@@ -36,7 +37,7 @@
     }
 
     function reserveClicked() {
-        showModal = true;
+        form.submit();
     }
 </script>
 
@@ -63,7 +64,7 @@
                 </div>
             {/if}
 
-            <Fab on:click={() => reserveClicked()} color="secondary" extended
+            <Fab on:click={() => (showModal = true)} color="secondary" extended
                 >Reserve</Fab
             >
         </div>
@@ -90,7 +91,7 @@
             <div class="text-field">
                 <!-- @ts-ignore -->
                 <Textfield
-                    bind:value={textValue}
+                    bind:value={message}
                     label="Message (optional)"
                     textarea
                     input$rows={3}
@@ -100,7 +101,7 @@
             <div class="mb-1 p-0">
                 <Textfield
                     variant="outlined"
-                    bind:value={emailAddress}
+                    bind:value={email}
                     label="Email"
                     style="padding: 0;"
                 />
@@ -127,6 +128,21 @@
         </div>
     </Modal>
 {/if}
+
+<div class="hidden">
+    <form
+        bind:this={form}
+        action="https://formsubmit.co/d44fefa7c974ee3bc959adbde1c49b0d"
+        method="POST"
+    >
+        <input value={fromDate} type="text" name="Start Date" />
+        <input value={toDate} type="text" name="End Date" />
+        <input value={guests} type="text" name="Guests" />
+        <input value={message} type="text" name="Message" />
+        <input value={email} type="text" name="Email" />
+        <input value={phone} type="text" name="Phone" />
+    </form>
+</div>
 
 <style>
     .container {
@@ -161,6 +177,10 @@
 
     .p-0 {
         padding: 0;
+    }
+
+    .hidden {
+        display: none;
     }
 
     @media (max-width: 800px) {
