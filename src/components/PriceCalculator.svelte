@@ -18,7 +18,7 @@
 
     const dispatch = createEventDispatcher();
     let form;
-    let showModal = true;
+    let showModal = false;
     let message = "";
     let email = "";
     let phone = "";
