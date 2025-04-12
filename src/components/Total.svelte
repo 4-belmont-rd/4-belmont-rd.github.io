@@ -11,16 +11,16 @@
 <div class="container">
     <Card>
         <div>
-            <span class="left"> {days} x £{pricePerDay} </span>
-            <span class="right"> £{days * pricePerDay} </span>
+            <span class="left"> {days} x £{pricePerDay.toFixed(2)} </span>
+            <span class="right"> £{(days * pricePerDay).toFixed(2)} </span>
         </div>
         <div>
             <span class="left"> Booking fee </span>
-            <span class="right"> £{bookingFee} </span>
+            <span class="right"> £{bookingFee.toFixed(2)} </span>
         </div>
         <div>
             <span class="left"> Total </span>
-            <span class="right"> £{total} </span>
+            <span class="right"> £{total.toFixed(2)} </span>
         </div>
     </Card>
 </div>
