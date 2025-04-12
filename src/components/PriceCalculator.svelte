@@ -25,6 +25,7 @@
     let guests;
 
     $: days = calculateDays(fromDate, toDate);
+    $: formValid = days > 0 && (email != "" || phone != "");
 
     function calculateDays(fromDate: Date, toDate: Date) {
         if (fromDate == null || toDate == null) return 0;
@@ -56,17 +57,15 @@
                 on:datePickerChanged={(event) => (toDate = event.detail)}
             />
 
-            <SelectField label="Guests" items={["1", "2", "3", "4"]} />
-
             {#if days > 0}
                 <div class="total">
                     <Total {days} {pricePerDay} {bookingFee} />
                 </div>
             {/if}
 
-            <Fab on:click={() => (showModal = true)} color="secondary" extended
-                >Reserve</Fab
-            >
+            <Fab on:click={() => (showModal = true)} color="secondary" extended>
+                Reserve
+            </Fab>
         </div>
     </Card>
 </div>
@@ -123,9 +122,14 @@
                 </div>
             {/if}
 
-            <Fab on:click={() => reserveClicked()} color="secondary" extended
-                >Reserve</Fab
-            >
+            <div class:disabled={!formValid}>
+                <Fab
+                    on:click={() => reserveClicked()}
+                    disabled={!formValid}
+                    color="secondary"
+                    extended>Reserve</Fab
+                >
+            </div>
         </div>
     </Modal>
 {/if}
@@ -184,6 +188,11 @@
 
     .hidden {
         display: none;
+    }
+
+    .disabled {
+        opacity: 0.5;
+        pointer-events: none; /* Just in case */
     }
 
     @media (max-width: 800px) {
