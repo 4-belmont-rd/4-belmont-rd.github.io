@@ -37,8 +37,8 @@
     .modal {
         position: relative;
         background-color: white;
-        width: 80vw;
-        height: 80vh;
+        width: 400px;
+        height: 750px;
         border-radius: 8px;
         padding: 2rem;
         box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
@@ -59,6 +59,7 @@
 
     @media (max-width: 800px) {
         .modal {
+            width: 80vw;
             height: 84vh;
         }
     }

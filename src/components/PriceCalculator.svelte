@@ -95,6 +95,7 @@
                     label="Message (optional)"
                     textarea
                     input$rows={3}
+                    input$resizable={false}
                 />
             </div>
 
@@ -159,6 +160,7 @@
 
     .form {
         justify-content: center;
+        font-size: 20px;
     }
 
     .form-title {
