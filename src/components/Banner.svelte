@@ -42,6 +42,9 @@
         background: rgba(255, 255, 255, 0.9);
         padding: 1rem;
         border-radius: 8px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #e0e0e0;
         text-align: center;
     }
 

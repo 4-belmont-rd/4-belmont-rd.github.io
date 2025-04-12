@@ -41,22 +41,20 @@
   <div class="calendar-wrapper">
     <Month {currentMonth} {bookedDates} {startDate} {endDate} on:dateSelected
     ></Month>
-    {#if !isMobile}
-      <Month
-        currentMonth={currentMonth + 1}
-        {bookedDates}
-        {startDate}
-        {endDate}
-        on:dateSelected
-      ></Month>
-      <Month
-        currentMonth={currentMonth + 2}
-        {bookedDates}
-        {startDate}
-        {endDate}
-        on:dateSelected
-      ></Month>
-    {/if}
+    <Month
+      currentMonth={currentMonth + 1}
+      {bookedDates}
+      {startDate}
+      {endDate}
+      on:dateSelected
+    ></Month>
+    <Month
+      currentMonth={currentMonth + 2}
+      {bookedDates}
+      {startDate}
+      {endDate}
+      on:dateSelected
+    ></Month>
   </div>
 {:else}
   <div class="mobile-navigation">
