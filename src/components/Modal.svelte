@@ -59,8 +59,9 @@
 
     @media (max-width: 800px) {
         .modal {
-            width: 80vw;
-            height: 84vh;
+            transform: scale(0.7);
+            width: 90vw;
+            height: 110vh;
         }
     }
 </style>

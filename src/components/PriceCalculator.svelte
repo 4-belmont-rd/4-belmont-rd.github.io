@@ -18,7 +18,7 @@
 
     const dispatch = createEventDispatcher();
     let form;
-    let showModal = false;
+    let showModal = true;
     let message = "";
     let email = "";
     let phone = "";
@@ -160,10 +160,11 @@
 
     .form {
         justify-content: center;
-        font-size: 20px;
+        color: #213547;
     }
 
     .form-title {
+        color: #213547;
         margin-top: 0;
         margin-bottom: 1rem;
     }
