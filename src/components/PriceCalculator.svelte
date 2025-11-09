@@ -63,9 +63,15 @@
                 </div>
             {/if}
 
-            <Fab on:click={() => (showModal = true)} color="secondary" extended>
-                Reserve
-            </Fab>
+            <div class="mt-2">
+                <Fab
+                    on:click={() => (showModal = true)}
+                    color="secondary"
+                    extended
+                >
+                    Reserve
+                </Fab>
+            </div>
         </div>
     </Card>
 </div>
@@ -176,6 +182,10 @@
     .text-field {
         width: 100%;
         margin-bottom: 1rem;
+    }
+
+    .mt-2 {
+        margin-top: 2rem;
     }
 
     .mb-1 {
