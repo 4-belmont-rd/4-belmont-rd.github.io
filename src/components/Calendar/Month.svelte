@@ -93,52 +93,52 @@
   }
 </script>
 
+<div class="calendar-header">
   <div class="header">
-    <strong
-      >{months[currentMonth % 12]}
-      {currentMonth === 11 ? currentYear + 1 : currentYear}</strong
-    >
+    <strong>
+      {months[currentMonth % 12]} {currentMonth === 11 ? currentYear + 1 : currentYear}
+    </strong>
   </div>
-<div class="calendar">
+  <div class="calendar">
+    <!-- Days of the week -->
+    {#each daysOfWeek as dayOfWeek}
+      <div class="day"><strong>{dayOfWeek}</strong></div>
+    {/each}
 
-  <!-- Days of the week -->
-  {#each daysOfWeek as dayOfWeek}
-    <div class="day"><strong>{dayOfWeek}</strong></div>
-  {/each}
+    <!-- Empty cells for the first week -->
+    {#each Array((getStartDayOfMonth(currentYear, currentMonth % 12) + 6) % 7).fill(0) as _}
+      <div class="day"></div>
+    {/each}
 
-  <!-- Empty cells for the first week -->
-  {#each Array((getStartDayOfMonth(currentYear, currentMonth % 12) + 6) % 7).fill(0) as _}
-    <div class="day"></div>
-  {/each}
-
-  <!-- Days of the month -->
-  {#key takenDates}
-    {#key startDate}
-      {#key endDate}
-        {#each Array(getDaysInMonth(currentYear, currentMonth % 12))
-          .fill(0)
-          .map((_, i) => i + 1) as day}
-          <div
-            class="day"
-            class:taken={isTaken(day, currentMonth, currentYear)}
-            class:today={isToday(day, currentMonth, currentYear)}
-            class:selected={isSelected(day, currentMonth, currentYear)}
-            class:between={isBetween(day, currentMonth, currentYear)}
-            on:click={() =>
-              dateSelected(new Date(currentYear, currentMonth, day))}
-            on:keydown={() =>
-              dateSelected(new Date(currentYear, currentMonth, day))}
-            on:keyup={() =>
-              dateSelected(new Date(currentYear, currentMonth, day))}
-            on:keypress={() =>
-              dateSelected(new Date(currentYear, currentMonth, day))}
-          >
-            {day}
-          </div>
-        {/each}
+    <!-- Days of the month -->
+    {#key takenDates}
+      {#key startDate}
+        {#key endDate}
+          {#each Array(getDaysInMonth(currentYear, currentMonth % 12))
+            .fill(0)
+            .map((_, i) => i + 1) as day}
+            <div
+              class="day"
+              class:taken={isTaken(day, currentMonth, currentYear)}
+              class:today={isToday(day, currentMonth, currentYear)}
+              class:selected={isSelected(day, currentMonth, currentYear)}
+              class:between={isBetween(day, currentMonth, currentYear)}
+              on:click={() =>
+                dateSelected(new Date(currentYear, currentMonth, day))}
+              on:keydown={() =>
+                dateSelected(new Date(currentYear, currentMonth, day))}
+              on:keyup={() =>
+                dateSelected(new Date(currentYear, currentMonth, day))}
+              on:keypress={() =>
+                dateSelected(new Date(currentYear, currentMonth, day))}
+            >
+              {day}
+            </div>
+          {/each}
+        {/key}
       {/key}
     {/key}
-  {/key}
+  </div>
 </div>
 
 <style>
@@ -150,9 +150,16 @@
     margin: 10px;
   }
 
+  .calendar-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
   .header {
     text-align: center;
     margin-bottom: 10px;
+    width: 100%;
   }
 
   .day {
