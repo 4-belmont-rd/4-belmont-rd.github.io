@@ -33,7 +33,7 @@
     "December",
   ];
 
-  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
   function getDaysInMonth(year, month) {
     return new Date(year, month + 1, 0).getDate();
@@ -93,14 +93,13 @@
   }
 </script>
 
-<div class="calendar">
   <div class="header">
     <strong
       >{months[currentMonth % 12]}
       {currentMonth === 11 ? currentYear + 1 : currentYear}</strong
     >
   </div>
-  <br />
+<div class="calendar">
 
   <!-- Days of the week -->
   {#each daysOfWeek as dayOfWeek}
@@ -108,7 +107,7 @@
   {/each}
 
   <!-- Empty cells for the first week -->
-  {#each Array(getStartDayOfMonth(currentYear, currentMonth % 12)).fill(0) as _}
+  {#each Array((getStartDayOfMonth(currentYear, currentMonth % 12) + 6) % 7).fill(0) as _}
     <div class="day"></div>
   {/each}
 
