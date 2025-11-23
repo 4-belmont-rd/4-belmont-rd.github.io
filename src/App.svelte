@@ -85,6 +85,11 @@
         <p>
           Town centre, many cafe’s, pubs and shops are all within a short walk.
         </p>
+
+        <p>
+          You can see the latest reviews on 
+        <a href="https://www.airbnb.co.uk/rooms/1221766328608212785">Airbnb</a>
+        </p>
       </Card>
     </div>
 
