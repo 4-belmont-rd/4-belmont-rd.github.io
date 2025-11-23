@@ -80,4 +80,10 @@
             margin-top: 1rem;
         }
     }
+
+    @media (prefers-color-scheme: dark) {
+        .calendar {
+            background-color: #222;
+        }
+    }
 </style>

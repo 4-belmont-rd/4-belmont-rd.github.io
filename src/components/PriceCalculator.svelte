@@ -216,4 +216,10 @@
             width: 70vw;
         }
     }
+
+    @media (prefers-color-scheme: dark) {
+        .content {
+            background-color: #222;
+        }
+    }
 </style>

@@ -160,4 +160,10 @@
       display: none;
     }
   }
+
+  @media (prefers-color-scheme: dark) {
+    .info-section-card {            
+      color: #222;
+    }
+  }
 </style>
