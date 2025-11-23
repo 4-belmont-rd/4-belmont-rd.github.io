@@ -88,7 +88,7 @@
 
         <p>
           You can see the latest reviews on 
-        <a href="https://www.airbnb.co.uk/rooms/1221766328608212785">Airbnb</a>
+        <a href="https://www.airbnb.co.uk/rooms/1221766328608212785">Airbnb</a>.
         </p>
       </Card>
     </div>
