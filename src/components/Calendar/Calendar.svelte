@@ -31,6 +31,11 @@
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   });
+
+  function clear() {
+    startDate = undefined;
+    endDate = undefined;
+  }
 </script>
 
 {#if !isMobile}
@@ -62,6 +67,13 @@
     <button on:click={() => changeMonth(1)} class="next">&#9655;</button>
     <Month {currentMonth} {bookedDates} {startDate} {endDate} on:dateSelected
     ></Month>
+  </div>
+{/if}
+{#if startDate || endDate}
+  <div class="mb-5">
+    <button class="clear" on:click={() => clear()}>
+      Clear dates
+    </button>
   </div>
 {/if}
 
@@ -107,5 +119,12 @@
 
   .next {
     right: 5px;
+  }
+
+  .clear {
+    background: none;
+    border: none;
+    font-weight: bold;
+    color: #018786;
   }
 </style>
