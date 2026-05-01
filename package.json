@@ -22,14 +22,6 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.4",
-    "@smui/button": "^7.0.0",
-    "@smui/card": "^7.0.0",
-    "@smui/data-table": "^7.0.0",
-    "@smui/fab": "^7.0.0",
-    "@smui/image-list": "^7.0.0",
-    "@smui/select": "^7.0.0",
-    "@smui/ripple": "^7.0.0",
-    "svelte-material-ui": "^7.0.0",
     "tailwindcss": "^4.2.4"
   }
 }

@@ -1,20 +1,43 @@
 <script lang="ts">
-    import Select, { Option } from "@smui/select";
-
     export let label: string;
     export let items: string[] = [];
+    export let value: string = "";
 </script>
 
 <div class="container">
-    <Select class="shaped-outlined" variant="outlined" {label}>
+    <label for="select">{label}</label>
+    <select bind:value class="select">
         {#each items as item}
-            <Option value={item}>{item}</Option>
+            <option value={item}>{item}</option>
         {/each}
-    </Select>
+    </select>
 </div>
 
 <style>
     .container {
         margin-bottom: 1rem;
+    }
+
+    .select {
+        width: 100%;
+        border-radius: 0.375rem;
+        border-width: 1px;
+        border-color: #d1d5db;
+        background-color: #ffffff;
+        padding: 0.5rem 0.75rem;
+        color: #111827;
+    }
+
+    .select:focus {
+        outline: none;
+        border-color: #2563eb;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .select {
+            border-color: #4b5563;
+            background-color: #374151;
+            color: #f9fafb;
+        }
     }
 </style>

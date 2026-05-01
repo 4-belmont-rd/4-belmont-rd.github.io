@@ -19,6 +19,9 @@
   onMount(async () => {
     bookedDates = await fetchBookedDates();
     window.addEventListener("resize", handleResize);
+  });
+
+  onMount(() => {
     return () => window.removeEventListener("resize", handleResize);
   });
 

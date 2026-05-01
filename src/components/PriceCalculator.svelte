@@ -1,7 +1,5 @@
 <script lang="ts">
     import Card from "./Card.svelte";
-    import Fab from "@smui/fab";
-    import Textfield from "@smui/textfield";
     import DatePicker from "./DatePicker.svelte";
     import SelectField from "./SelectField.svelte";
     import Total from "./Total.svelte";
@@ -64,13 +62,12 @@
             {/if}
 
             <div class="mt-2">
-                <Fab
+                <button
                     on:click={() => (showModal = true)}
-                    color="secondary"
-                    extended
+                    class="reserve-btn"
                 >
                     Reserve
-                </Fab>
+                </button>
             </div>
         </div>
     </Card>
@@ -94,31 +91,28 @@
             <SelectField label="Guests" items={["1", "2", "3", "4"]} />
 
             <div class="text-field">
-                <!-- @ts-ignore -->
-                <Textfield
+                <textarea
                     bind:value={message}
-                    label="Message (optional)"
-                    textarea
-                    input$rows={3}
-                    input$resizable={false}
+                    class="textarea"
+                    placeholder="Message (optional)"
                 />
             </div>
 
-            <div class="mb-1 p-0">
-                <Textfield
-                    variant="outlined"
+            <div class="mb-1">
+                <input
+                    type="email"
                     bind:value={email}
-                    label="Email"
-                    style="padding: 0;"
+                    class="input"
+                    placeholder="Email"
                 />
             </div>
 
-            <div class="mb-1 p-0">
-                <Textfield
-                    variant="outlined"
+            <div class="mb-1">
+                <input
+                    type="text"
                     bind:value={phone}
-                    label="Phone"
-                    style="padding: 0;"
+                    class="input"
+                    placeholder="Phone"
                 />
             </div>
 
@@ -129,12 +123,13 @@
             {/if}
 
             <div class:disabled={!formValid}>
-                <Fab
+                <button
                     on:click={() => reserveClicked()}
                     disabled={!formValid}
-                    color="secondary"
-                    extended>Reserve</Fab
+                    class="reserve-btn"
                 >
+                    Reserve
+                </button>
             </div>
         </div>
     </Modal>
@@ -202,7 +197,65 @@
 
     .disabled {
         opacity: 0.5;
-        pointer-events: none; /* Just in case */
+        pointer-events: none;
+    }
+
+    .input,
+    .textarea {
+        width: 100%;
+        border-radius: 0.375rem;
+        border-width: 1px;
+        border-color: #d1d5db;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .input:focus,
+    .textarea:focus {
+        outline: none;
+        border-color: #2563eb;
+    }
+
+    .textarea {
+        resize: none;
+        height: 4rem;
+    }
+
+    .reserve-btn {
+        border-radius: 9999px;
+        background-color: #2563eb;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        color: #ffffff;
+    }
+
+    .reserve-btn:hover:not(:disabled) {
+        background-color: #1d4ed8;
+    }
+
+    .reserve-btn:disabled {
+        background-color: #60a5fa;
+        cursor: not-allowed;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .content {
+            background-color: #222;
+        }
+
+        .form {
+            color: white;
+        }
+
+        .form-title {
+            color: white;
+        }
+
+        .input,
+        .textarea {
+            border-color: #4b5563;
+            background-color: #374151;
+            color: #f9fafb;
+        }
     }
 
     @media (max-width: 800px) {
@@ -214,12 +267,6 @@
 
         .content {
             width: 70vw;
-        }
-    }
-
-    @media (prefers-color-scheme: dark) {
-        .content {
-            background-color: #222;
         }
     }
 </style>
