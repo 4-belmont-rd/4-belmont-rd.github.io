@@ -12,51 +12,24 @@
     }
 </script>
 
-<div class="overlay" on:click={handleBackdropClick} in:fade out:fade>
+<div
+    class="overlay fixed inset-0 bg-black/50 flex items-center justify-center z-100"
+    role="button"
+    tabindex="0"
+    on:click={handleBackdropClick}
+    on:keydown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleBackdropClick() }}
+    in:fade out:fade>
     <div
-        class="modal"
+        class="modal relative bg-white w-400px h-750px rounded-lg p-8 shadow-lg"
         in:scale={{ duration: 200 }}
         out:scale={{ duration: 200 }}
     >
-        <button class="close-btn" on:click={onClose}>&#10005;</button>
+        <button class="close-btn absolute top-2.5 right-2.5 bg-transparent border-0 text-xl font-bold cursor-pointer z-1" on:click={onClose}>&#10005;</button>
         <slot />
     </div>
 </div>
 
 <style>
-    .overlay {
-        position: fixed;
-        inset: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 100;
-    }
-
-    .modal {
-        position: relative;
-        background-color: white;
-        width: 400px;
-        height: 750px;
-        border-radius: 8px;
-        padding: 2rem;
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: transparent;
-        border: none;
-        font-size: 20px;
-        font-weight: bold;
-        color: black;
-        cursor: pointer;
-        z-index: 1;
-    }
-
     @media (max-width: 800px) {
         .modal {
             transform: scale(0.7);

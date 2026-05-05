@@ -40,7 +40,7 @@
 
     input[type="date"] {
         border-radius: 8px;
-        border-color: rgb(33, 53, 71);
+        border: 1px solid rgb(33, 53, 71);
         color: rgb(33, 53, 71);
         padding: 8px 12px;
         font-size: 16px;
