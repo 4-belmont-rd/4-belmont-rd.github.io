@@ -36,6 +36,17 @@
 
     .container {
         margin: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .container > * {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
     }
 
     input[type="date"] {
@@ -46,6 +57,7 @@
         font-size: 16px;
         background-color: #f9f9f9;
         cursor: pointer;
+        text-align: center;
     }
 
     @media (max-width: 800px) {

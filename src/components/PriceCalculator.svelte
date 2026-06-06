@@ -69,6 +69,7 @@
                     Reserve
                 </button>
             </div>
+            <p class="pt-3">You won't be charged yet</p>
         </div>
     </Card>
 </div>
@@ -151,6 +152,10 @@
 </div>
 
 <style>
+    :root {
+        --primary: rgb(1, 135, 134);
+    }
+
     .container {
         display: flex;
     }
@@ -222,14 +227,15 @@
 
     .reserve-btn {
         border-radius: 9999px;
-        background-color: #2563eb;
+        background-color: var(--primary);
+        border-color: white;
         padding: 0.75rem 1.5rem;
         font-weight: 500;
         color: #ffffff;
     }
 
     .reserve-btn:hover:not(:disabled) {
-        background-color: #1d4ed8;
+        background-color: rgb(1, 170, 168);
     }
 
     .reserve-btn:disabled {
