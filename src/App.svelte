@@ -8,6 +8,7 @@
   import Calendar from "./components/Calendar/Calendar.svelte";
   import RoomsImageList from "./components/RoomsImageList.svelte";
   import RoomsImageCarousel from "./components/RoomsImageCarousel.svelte";
+  import Contact from "./components/Contact.svelte";
 
   let bookedDates: Date[] = [];
 
@@ -87,8 +88,9 @@
         </p>
 
         <p>
-          You can see the latest reviews on 
-        <a href="https://www.airbnb.co.uk/rooms/1221766328608212785">Airbnb</a>.
+          You can see the latest reviews on
+          <a href="https://www.airbnb.co.uk/rooms/1221766328608212785">Airbnb</a
+          >.
         </p>
       </Card>
     </div>
@@ -118,6 +120,8 @@
   <div class="hide-on-mobile">
     <RoomsImageList />
   </div>
+
+  <Contact />
 </main>
 
 <style>
