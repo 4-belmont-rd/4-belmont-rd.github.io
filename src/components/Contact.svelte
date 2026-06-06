@@ -7,12 +7,17 @@
       <span class="label">Call</span>
       <span class="value">07956 370285</span>
     </a>
+    <a href="sms:+447956370285" class="contact-option sms">
+      <span class="icon">💬</span>
+      <span class="label">Text</span>
+      <span class="value">07956 370285</span>
+    </a>
     <a href="https://wa.me/447956370285" class="contact-option whatsapp">
       <span class="icon">💬</span>
       <span class="label">WhatsApp</span>
       <span class="value">07956 370285</span>
     </a>
-    <a href="mailto:jackypyne@gmail.com" class="contact-option">
+    <a href="mailto:jackypyne@gmail.com" class="contact-option email">
       <span class="icon">✉️</span>
       <span class="label">Email</span>
       <span class="value">jackypyne@gmail.com</span>
@@ -85,6 +90,14 @@
 
   .contact-option.whatsapp:hover {
     border-color: #25d366;
+  }
+
+  .contact-option.sms:hover {
+    border-color: #25d366;
+  }
+
+  .contact-option.email:hover {
+    border-color: #646cff;
   }
 
   @media (min-width: 600px) {
