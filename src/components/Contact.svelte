@@ -1,3 +1,8 @@
+
+<script>
+  import whatsappIcon from '../assets/icons/whatsapp.svg';
+</script>
+
 <section class="contact-section">
   <h2>Contact Us</h2>
   <p>Have a question about our holiday rental? Get in touch.</p>
@@ -13,7 +18,7 @@
       <span class="value">07956 370285</span>
     </a>
     <a href="https://wa.me/447956370285" class="contact-option whatsapp">
-      <span class="icon">💬</span>
+      <img src={whatsappIcon} alt="WhatsApp" class="icon" />
       <span class="label">WhatsApp</span>
       <span class="value">07956 370285</span>
     </a>
@@ -75,6 +80,13 @@
 
   .contact-option .icon {
     font-size: 1.5rem;
+  }
+
+  .contact-option .icon[src] {
+    font-size: inherit;
+    line-height: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
   .contact-option .label {
