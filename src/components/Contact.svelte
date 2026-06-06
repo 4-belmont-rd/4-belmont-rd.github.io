@@ -4,7 +4,7 @@
   <div class="contact-options">
     <a href="tel:+447956370285" class="contact-option">
       <span class="icon">📞</span>
-      <span class="label">Call us</span>
+      <span class="label">Call</span>
       <span class="value">07956 370285</span>
     </a>
     <a href="https://wa.me/447956370285" class="contact-option whatsapp">
@@ -14,7 +14,7 @@
     </a>
     <a href="mailto:jackypyne@gmail.com" class="contact-option">
       <span class="icon">✉️</span>
-      <span class="label">Email us</span>
+      <span class="label">Email</span>
       <span class="value">jackypyne@gmail.com</span>
     </a>
   </div>
