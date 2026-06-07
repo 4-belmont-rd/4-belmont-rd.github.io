@@ -1,6 +1,5 @@
-
 <script>
-  import whatsappIcon from '../assets/icons/whatsapp.svg';
+  import whatsappIcon from "../assets/icons/whatsapp.svg";
 </script>
 
 <section class="contact-section">
@@ -32,9 +31,13 @@
 
 <style>
   .contact-section {
+    margin-top: 1rem;
     padding: 3rem 2rem;
     background-color: var(--bg-secondary, #f9f9f9);
     text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 1rem;
   }
 
   .contact-section h2 {
@@ -98,6 +101,19 @@
     font-family: monospace;
     color: var(--text-secondary, #606770);
     font-size: 0.95rem;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .contact-option.email .value {
+    min-width: 120px;
+    text-align: left;
+    padding-right: 1rem;
+  }
+
+  .contact-option.email {
+    text-align: left;
   }
 
   .contact-option.whatsapp:hover {
@@ -130,6 +146,7 @@
   @media (prefers-color-scheme: dark) {
     .contact-section {
       background-color: #1a1a1a;
+      border-radius: 0;
     }
 
     .contact-option {
