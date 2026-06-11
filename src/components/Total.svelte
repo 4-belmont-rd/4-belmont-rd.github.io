@@ -10,27 +10,33 @@
 
 <div class="container">
     <Card>
-        <div>
-            <span class="left"> {days} x £{pricePerDay.toFixed(2)} </span>
-            <span class="right"> £{(days * pricePerDay).toFixed(2)} </span>
+        <div class="row">
+            <span> {days} x £{pricePerDay.toFixed(2)} </span>
+            <span> £{(days * pricePerDay).toFixed(2)} </span>
         </div>
-        <div>
-            <span class="left"> Booking fee </span>
-            <span class="right"> £{bookingFee.toFixed(2)} </span>
+        <div class="row">
+            <span> Booking fee </span>
+            <span> £{bookingFee.toFixed(2)} </span>
         </div>
-        <div>
-            <span class="left"> Total </span>
-            <span class="right"> £{total.toFixed(2)} </span>
+        <div class="row total-row">
+            <span> Total </span>
+            <span> £{total.toFixed(2)} </span>
         </div>
     </Card>
 </div>
 
 <style>
-    .right {
-        float: right;
+    .row {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.2rem 0;
     }
 
-    .left {
-        float: left;
+    .total-row {
+        margin-top: 0.4rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid rgba(128, 128, 128, 0.4);
+        font-weight: 600;
     }
 </style>

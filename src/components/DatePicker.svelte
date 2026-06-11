@@ -53,4 +53,10 @@
             color: #213547;
         }
     }
+
+    @media (prefers-color-scheme: dark) {
+        p {
+            color: inherit;
+        }
+    }
 </style>

@@ -240,8 +240,17 @@
     }
 
     @media (prefers-color-scheme: dark) {
-        .content {
-            background-color: #222;
+        .container {
+            --mdc-theme-surface: #222;
+            color: rgba(255, 255, 255, 0.87);
+        }
+
+        .container :global(.mdc-card--outlined) {
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .clear-dates {
+            color: #03dac6;
         }
     }
 </style>
