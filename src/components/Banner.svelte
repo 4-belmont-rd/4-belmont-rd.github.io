@@ -6,6 +6,11 @@
     export let bookedDates: Date[] = [];
     export let startDate: Date;
     export let endDate: Date;
+
+    function handleClear() {
+        startDate = undefined;
+        endDate = undefined;
+    }
 </script>
 
 <div class="container" style="background-image: url({imageSrc});">
@@ -13,7 +18,7 @@
         <PriceCalculator fromDate={startDate} toDate={endDate} />
     </div>
     <div class="calendar">
-        <Calendar {bookedDates} {startDate} {endDate} on:dateSelected />
+        <Calendar {bookedDates} {startDate} {endDate} on:dateSelected on:clear={handleClear} />
     </div>
 </div>
 

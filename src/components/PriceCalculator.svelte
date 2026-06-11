@@ -40,7 +40,12 @@
     function reserveClicked() {
         form.submit();
     }
-</script>
+
+        function clearDates() {
+            fromDate = null;
+            toDate = null;
+        }
+    </script>
 
 <div class="container">
     <Card {shadow}>
@@ -72,6 +77,14 @@
                     Reserve
                 </Fab>
             </div>
+
+            {#if fromDate || toDate}
+            <div class="mt-2">
+                <button class="clear-dates" on:click={clearDates}>
+                    Clear dates
+                </button>
+            </div>
+            {/if}
         </div>
     </Card>
 </div>
@@ -215,6 +228,15 @@
         .content {
             width: 70vw;
         }
+    }
+
+    .clear-dates {
+        background: none;
+        border: none;
+        font-weight: bold;
+        color: #018786;
+        cursor: pointer;
+        margin-top: 1rem;
     }
 
     @media (prefers-color-scheme: dark) {

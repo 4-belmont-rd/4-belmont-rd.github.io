@@ -1,10 +1,13 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { createEventDispatcher } from "svelte";
   import Month from "./Month.svelte";
 
   export var bookedDates: Date[] = [];
   export let startDate: Date;
   export let endDate: Date;
+
+  const dispatch = createEventDispatcher();
 
   let today = new Date();
   let currentMonth = today.getMonth();
@@ -33,8 +36,7 @@
   });
 
   function clear() {
-    startDate = undefined;
-    endDate = undefined;
+    dispatch("clear");
   }
 </script>
 
