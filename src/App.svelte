@@ -171,8 +171,13 @@
   }
 
   @media (prefers-color-scheme: dark) {
-    .info-section-card {            
-      color: #222;
+    .info-section-card {
+      --mdc-theme-surface: #222;
+      color: rgba(255, 255, 255, 0.87);
+    }
+
+    .info-section-card :global(.mdc-card--outlined) {
+      border-color: rgba(255, 255, 255, 0.15);
     }
   }
 </style>

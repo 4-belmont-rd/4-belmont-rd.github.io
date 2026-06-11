@@ -89,6 +89,7 @@
   button {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
+    color: #213547;
     cursor: pointer;
     padding: 5px 10px;
   }
@@ -128,5 +129,17 @@
     border: none;
     font-weight: bold;
     color: #018786;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    button {
+      background-color: #2a2a2a;
+      border-color: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.87);
+    }
+
+    .clear {
+      color: #03dac6;
+    }
   }
 </style>
