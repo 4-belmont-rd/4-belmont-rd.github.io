@@ -34,7 +34,8 @@
 
         const milliseconds = toDate.getTime() - fromDate.getTime();
         const days = Math.abs(milliseconds) / (1000 * 60 * 60 * 24);
-        return Math.floor(days);
+        // Round, not floor: local midnights are 23/25h apart across DST changes
+        return Math.round(days);
     }
 
     function reserveClicked() {
