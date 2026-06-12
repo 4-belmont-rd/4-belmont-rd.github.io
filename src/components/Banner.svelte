@@ -15,7 +15,7 @@
 
 <div class="container" style="background-image: url({imageSrc});">
     <div class="price-calculator">
-        <PriceCalculator fromDate={startDate} toDate={endDate} />
+        <PriceCalculator bind:fromDate={startDate} bind:toDate={endDate} />
     </div>
     <div class="calendar">
         <Calendar {bookedDates} {startDate} {endDate} on:dateSelected on:clear={handleClear} />

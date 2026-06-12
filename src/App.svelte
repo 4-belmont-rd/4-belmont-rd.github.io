@@ -55,8 +55,8 @@
     <Banner
       imageSrc="/images/exterior/1.webp"
       {bookedDates}
-      startDate={selectedStartDate}
-      endDate={selectedEndDate}
+      bind:startDate={selectedStartDate}
+      bind:endDate={selectedEndDate}
       on:dateSelected={(event) => onDateSelected(event.detail)}
     />
   </div>

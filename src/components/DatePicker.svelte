@@ -1,7 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
     export let title: string;
-    export let value: string = "";
     export let date: Date;
 
     const dispatch = createEventDispatcher();
@@ -9,9 +8,20 @@
 
     $: value = date && !isNaN(date.getTime()) ? toIsoDate(date) : "";
 
-    // Local-time formatting: must round-trip exactly with the input's own
-    // value, otherwise Svelte writes the value back mid-typing and wipes
-    // the user's partially entered date.
+    // Sync via an action, NOT bind:value or value={...}: Svelte's own DOM
+    // writes fire on every state change — even rewriting an identical string —
+    // and any write to a date input resets the browser's in-progress segment
+    // editing, wiping what the user is typing. Only write on real changes.
+    function syncValue(node: HTMLInputElement, v: string) {
+        node.value = v;
+        return {
+            update(v: string) {
+                if (node.value !== v) node.value = v;
+            },
+        };
+    }
+
+    // Local-time formatting so the round-trip with the input is lossless
     function toIsoDate(d: Date): string {
         const year = String(d.getFullYear()).padStart(4, "0");
         const month = String(d.getMonth() + 1).padStart(2, "0");
@@ -21,7 +31,7 @@
 
     function onChange(event: Event) {
         const input = event.currentTarget as HTMLInputElement;
-        if (value === "") {
+        if (input.value === "") {
             dispatch("datePickerChanged", null);
             return;
         }
@@ -29,13 +39,13 @@
         // after the first year digit). Those fail the min check — wait for a
         // valid date before notifying the parent.
         if (!input.checkValidity()) return;
-        dispatch("datePickerChanged", new Date(value + "T00:00:00"));
+        dispatch("datePickerChanged", new Date(input.value + "T00:00:00"));
     }
 </script>
 
 <div class="container">
     <p>{title}</p>
-    <input type="date" bind:value min={today} on:change={onChange} />
+    <input type="date" use:syncValue={value} min={today} on:change={onChange} />
 </div>
 
 <style>
