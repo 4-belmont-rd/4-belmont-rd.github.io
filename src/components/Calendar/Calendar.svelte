@@ -42,8 +42,8 @@
 
 {#if !isMobile}
   <div class="navigation">
-    <button on:click={() => changeMonth(-1)}>&lt; Previous</button>
-    <button on:click={() => changeMonth(1)}>Next &gt;</button>
+    <button on:click={() => changeMonth(-1)} class="nav-arrow" aria-label="Previous month">&#9665;</button>
+    <button on:click={() => changeMonth(1)} class="nav-arrow" aria-label="Next month">&#9655;</button>
   </div>
   <div class="calendar-wrapper">
     <Month {currentMonth} {bookedDates} {startDate} {endDate} on:dateSelected
@@ -86,12 +86,12 @@
     padding: 10px;
   }
 
-  button {
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    color: #213547;
+  .nav-arrow {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
     cursor: pointer;
-    padding: 5px 10px;
   }
 
   .navigation {
@@ -132,12 +132,6 @@
   }
 
   @media (prefers-color-scheme: dark) {
-    button {
-      background-color: #2a2a2a;
-      border-color: rgba(255, 255, 255, 0.2);
-      color: rgba(255, 255, 255, 0.87);
-    }
-
     .clear {
       color: #03dac6;
     }
