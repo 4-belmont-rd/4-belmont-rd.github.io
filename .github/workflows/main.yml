@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches: ['main']
+  schedule:
+    # Daily rebuild so booked.ics picks up new Airbnb reservations
+    - cron: '15 4 * * *'
 
 permissions:
   contents: read
@@ -32,6 +35,10 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build  # Ensure this runs successfully
+      - name: Fetch Airbnb availability
+        # -f fails the deploy if Airbnb errors, keeping the previous deployment
+        # (with its older booked.ics) live rather than shipping an empty calendar
+        run: curl -sf 'https://www.airbnb.com/calendar/ical/1221766328608212785.ics?s=4d2dd1dfb1a415240779bbded1cfe075&locale=en-GB' -o ./dist/booked.ics
       - name: Disable Jekyll for GitHub Pages
         run: echo "" > ./dist/.nojekyll
       - name: Setup Pages

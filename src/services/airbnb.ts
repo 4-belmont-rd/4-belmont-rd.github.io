@@ -2,8 +2,10 @@ let startDates: Date[] = [];
 let endDates: Date[] = [];
 
 export async function fetchBookedDates(): Promise<Date[]> {
-  const proxiedUrl = `https://corsproxy.io/?${encodeURIComponent("https://www.airbnb.com/calendar/ical/1221766328608212785.ics?s=4d2dd1dfb1a415240779bbded1cfe075&locale=en-GB")}`;
-  const response = await fetch(proxiedUrl);
+  // Same-origin: the deploy workflow drops the Airbnb iCal into dist/booked.ics,
+  // and the Vite dev server proxies this path to Airbnb (see vite.config.ts).
+  // Airbnb's iCal endpoint has no CORS headers, so the browser can't fetch it directly.
+  const response = await fetch("/booked.ics");
   const icalText = await response.text();
 
   for (const line of icalText.split("\n")) {
