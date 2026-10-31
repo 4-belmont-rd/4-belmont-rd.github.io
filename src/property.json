@@ -1,0 +1,45 @@
+{
+  "name": "Belmont Road, Whitstable",
+  "summary": "Traditional cottage within easy reach of the beach and town centre.",
+  "description": [
+    "Traditional cottage within easy reach of the beach and town centre.",
+    "Three bedroom cottage spread over 3 floors.\nBedroom 1 with double bed, bedroom 2 with petite double, attic bedroom with double bed (additional single bed can be requested in advance).",
+    "Fully equipped kitchen. Open plan living room with wood burner, fast WiFi and TV.",
+    "11 minute walk from the beach, 9 minute walk from the station. Free on street parking.",
+    "Town centre, many cafe’s, pubs and shops are all within a short walk."
+  ],
+  "location": {
+    "street": "Belmont Road",
+    "town": "Whitstable",
+    "county": "Kent",
+    "country": "GB",
+    "walkingMinutes": {
+      "beach": 11,
+      "station": 9
+    }
+  },
+  "reviewsUrl": "https://www.airbnb.co.uk/rooms/1221766328608212785",
+  "floors": 3,
+  "bedrooms": [
+    { "name": "Bedroom 1", "beds": ["double"] },
+    { "name": "Bedroom 2", "beds": ["petite double"] },
+    { "name": "Attic bedroom", "beds": ["double"] }
+  ],
+  "extraBeds": [
+    { "bed": "single", "note": "Can be requested in advance" }
+  ],
+  "maxGuests": 6,
+  "amenities": [
+    "Fully equipped kitchen",
+    "Open plan living room",
+    "Wood burner",
+    "Fast WiFi",
+    "TV"
+  ],
+  "parking": "Free on-street parking",
+  "pricing": {
+    "currency": "GBP",
+    "pricePerNight": 120,
+    "bookingFee": 12.5
+  }
+}

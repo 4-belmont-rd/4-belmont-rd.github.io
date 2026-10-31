@@ -9,6 +9,7 @@
   import RoomsImageList from "./components/RoomsImageList.svelte";
   import RoomsImageCarousel from "./components/RoomsImageCarousel.svelte";
   import Contact from "./components/Contact.svelte";
+  import property from "./property.json";
 
   let bookedDates: Date[] = [];
 
@@ -64,33 +65,13 @@
   <div class="info-section">
     <div class="info-section-card">
       <Card>
-        <p>
-          Traditional cottage within easy reach of the beach and town centre.
-        </p>
-        <p>
-          Three bedroom cottage spread over 3 floors.<br />
-          Bedroom 1 with double bed, bedroom 2 with petite double, attic bedroom
-          with double bed (additional single bed can be requested in advance).
-        </p>
-
-        <p>
-          Fully equipped kitchen. Open plan living room with wood burner, fast
-          WiFi and TV.
-        </p>
-
-        <p>
-          11 minute walk from the beach, 9 minute walk from the station. Free on
-          street parking.
-        </p>
-
-        <p>
-          Town centre, many cafe’s, pubs and shops are all within a short walk.
-        </p>
+        {#each property.description as paragraph}
+          <p class="description">{paragraph}</p>
+        {/each}
 
         <p>
           You can see the latest reviews on
-          <a href="https://www.airbnb.co.uk/rooms/1221766328608212785">Airbnb</a
-          >.
+          <a href={property.reviewsUrl}>Airbnb</a>.
         </p>
       </Card>
     </div>
@@ -125,6 +106,10 @@
 </main>
 
 <style>
+  .description {
+    white-space: pre-line;
+  }
+
   .info-section {
     display: flex;
     padding: 0 5%;

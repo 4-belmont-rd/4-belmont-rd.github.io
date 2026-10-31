@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Cloudflare Worker
+.wrangler
+.dev.vars*
+best/worker-configuration.d.ts

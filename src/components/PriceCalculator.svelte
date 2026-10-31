@@ -7,10 +7,11 @@
     import Total from "./Total.svelte";
     import Modal from "./Modal.svelte";
     import { createEventDispatcher } from "svelte";
+    import property from "../property.json";
 
     export let days: number = 0;
-    export let pricePerDay: number = 120;
-    export let bookingFee: number = 12.5;
+    export let pricePerDay: number = property.pricing.pricePerNight;
+    export let bookingFee: number = property.pricing.bookingFee;
     export let shadow: boolean = true;
 
     export let fromDate: Date = null;
@@ -22,10 +23,15 @@
     let message = "";
     let email = "";
     let phone = "";
-    let guests;
+    let name = "";
+    let guests = "";
+
+    const guestOptions = Array.from({ length: property.maxGuests }, (_, i) => String(i + 1));
 
     $: days = calculateDays(fromDate, toDate);
-    $: formValid = days > 0 && (email != "" || phone != "");
+    $: total = (days * pricePerDay + bookingFee).toFixed(2);
+    $: formValid =
+        days > 0 && name.trim() != "" && guests != "" && (email != "" || phone != "");
 
     function calculateDays(fromDate: Date, toDate: Date) {
         if (fromDate == null || toDate == null) return 0;
@@ -105,7 +111,16 @@
                 on:datePickerChanged={(event) => (toDate = event.detail)}
             />
 
-            <SelectField label="Guests" items={["1", "2", "3", "4"]} />
+            <SelectField label="Guests" items={guestOptions} bind:value={guests} />
+
+            <div class="mb-1 p-0">
+                <Textfield
+                    variant="outlined"
+                    bind:value={name}
+                    label="Name"
+                    style="padding: 0;"
+                />
+            </div>
 
             <div class="text-field">
                 <!-- @ts-ignore -->
@@ -163,9 +178,11 @@
         <input value={fromDate} type="text" name="Start Date" />
         <input value={toDate} type="text" name="End Date" />
         <input value={guests} type="text" name="Guests" />
+        <input value={name} type="text" name="Name" />
         <input value={message} type="text" name="Message" />
         <input value={email} type="text" name="Email" />
         <input value={phone} type="text" name="Phone" />
+        <input value={`£${total}`} type="text" name="Total" />
     </form>
 </div>
 

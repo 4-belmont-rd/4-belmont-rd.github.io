@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://behavioralstate.io/v1/schemas/cloudEvent.json",
+  "title": "CloudEvent",
+  "description": "BEST envelope for commands and events — a conformant profile of the CloudEvents 1.0 specification. BEST restricts CloudEvents (PascalCase type, JSON-only content, dataschema required for commands) but every valid BEST message is a valid CloudEvent 1.0 message. See design-decisions.md#cloudevents-conformance.",
+  "$defs": {
+    "cloudEvent": {
+      "type": "object",
+      "description": "A CloudEvent 1.0 message. Used as the wire format for BEST commands (sent to a service) and BEST events (published by a service). The data property is a domain-specific payload whose shape is defined by the JSON Schema at dataschema. Consumers MUST ignore unknown attributes (CloudEvents extension attributes and future protocol fields) rather than reject messages carrying them.",
+      "required": ["specversion", "id", "source", "type", "datacontenttype", "time", "data"],
+      "properties": {
+        "specversion": {
+          "type": "string",
+          "const": "1.0",
+          "description": "CloudEvent specification version. Always '1.0'."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique message identifier. UUID recommended. Must be unique within the scope of the source."
+        },
+        "source": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "URI-reference (RFC 3986) identifying the origin of the message. An absolute URI is recommended for interoperability; a relative reference (e.g. a service name) is valid. Always the caller's declared origin, never a routing key. For commands: set by the sender. For events: set by the publishing service. Never treated as authenticated identity."
+        },
+        "type": {
+          "type": "string",
+          "description": "Message type identifier in PascalCase (e.g. ProposeCounter, CounterProposed). For commands this must match a type in the command catalogue. For events this identifies the domain fact."
+        },
+        "datacontenttype": {
+          "type": "string",
+          "const": "application/json",
+          "description": "Content type of the data payload. Always 'application/json' in BEST (a profile restriction; CloudEvents allows any media type)."
+        },
+        "dataschema": {
+          "type": "string",
+          "format": "uri",
+          "description": "Absolute URI of the JSON Schema that defines the structure of data — for commands, the catalogue entry's dataschema value, which resolves to GET /commands/{schema}/{version} on the service's own surface. Required for commands, optional for events — when omitted the consumer is responsible for interpreting the data payload (untyped event). Servers validate against their own catalogue keyed by type and never fetch this URI."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp of when the message was created."
+        },
+        "correlationid": {
+          "type": "string",
+          "minLength": 1,
+          "description": "CloudEvents extension attribute (lowercase per CE naming rules) carrying the correlation identifier that ties a business process together. For commands: optional — when omitted, the server adopts the command's id as the correlation identifier. For events: required on every event produced as a result of processing a command, set to that command's correlation identifier; events not caused by a command may omit it. Callers issuing follow-up commands within the same process SHOULD propagate the same value."
+        },
+        "data": {
+          "type": "object",
+          "description": "The domain payload. For commands: validated against the schema at dataschema before queuing. For events: the recorded fact — opaque to the protocol.",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

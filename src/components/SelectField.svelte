@@ -3,10 +3,11 @@
 
     export let label: string;
     export let items: string[] = [];
+    export let value: string = "";
 </script>
 
 <div class="container">
-    <Select class="shaped-outlined" variant="outlined" {label}>
+    <Select class="shaped-outlined" variant="outlined" {label} bind:value>
         {#each items as item}
             <Option value={item}>{item}</Option>
         {/each}

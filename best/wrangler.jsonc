@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "belmont-best",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "routes": [
+    { "pattern": "belmontcottage.co.uk/.well-known/best", "zone_name": "belmontcottage.co.uk" },
+    { "pattern": "belmontcottage.co.uk/best/*", "zone_name": "belmontcottage.co.uk" },
+    { "pattern": "belmontcottage.co.uk/booked.ics", "zone_name": "belmontcottage.co.uk" }
+  ],
+  "vars": {
+    "AIRBNB_ICAL_URL": "https://www.airbnb.com/calendar/ical/1221766328608212785.ics?s=4d2dd1dfb1a415240779bbded1cfe075&locale=en-GB",
+    "FORMSUBMIT_URL": "https://formsubmit.co/ajax/d44fefa7c974ee3bc959adbde1c49b0d",
+    "SITE_ORIGIN": "https://belmontcottage.co.uk"
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "LEDGER", "class_name": "Ledger" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Ledger"] }],
+  "ratelimits": [
+    { "name": "READ_LIMITER", "namespace_id": "1001", "simple": { "limit": 60, "period": 60 } }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://behavioralstate.io/v1/schemas/agents/queries.json",
+  "title": "BEST Queries",
+  "description": "Schema for the query discovery and execution capability (io.best.agents.queries).",
+  "$defs": {
+    "queryCatalogueEntry": {
+      "type": "object",
+      "description": "An entry in the query catalogue — one available query type with its schema name, version, and dataschema URI.",
+      "required": ["schema", "version", "dataschema"],
+      "properties": {
+        "schema": {
+          "type": "string",
+          "description": "Query schema name in kebab-case (e.g. list-brokers, list-alerts). Used as the {schema} path segment in GET /queries/{schema}."
+        },
+        "version": {
+          "type": "string",
+          "description": "Schema version string (e.g. 1.0, 2.1). Used as the {version} path segment in GET /queries/{schema}/{version}."
+        },
+        "dataschema": {
+          "type": "string",
+          "format": "uri",
+          "description": "Resolvable URI to the JSON Schema document for this query, at GET /queries/{schema}/{version}."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable summary of what this query returns."
+        },
+        "workflows": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Ids of published workflows (io.best.agents.workflows) this query participates in — the protocol's single workflow-discoverability mechanism, stamped both here and on the query's schema document. Servers SHOULD populate it for every operation that appears in a recipe; consumers SHOULD read the recipe before composing a multi-step sequence themselves."
+        }
+      },
+      "additionalProperties": false
+    },
+    "queryCatalogue": {
+      "type": "object",
+      "description": "Response body for GET /queries. Lists all query types this service supports.",
+      "required": ["queries"],
+      "properties": {
+        "queries": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/queryCatalogueEntry" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "querySchemaDocument": {
+      "type": "object",
+      "description": "Response body for GET /queries/{schema}/{version}. Describes the parameters accepted and the response shape for a specific query.",
+      "required": ["response"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Human-readable summary of what the query returns."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "JSON Schema for accepted query string parameters. Omit if the query takes no parameters."
+        },
+        "response": {
+          "type": "object",
+          "description": "JSON Schema for the query response body."
+        },
+        "workflows": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Ids of published workflows (io.best.agents.workflows) this query participates in — the same cross-link array the catalogue entry carries, stamped here too so the pointer is present at whichever surface a consumer reads."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
