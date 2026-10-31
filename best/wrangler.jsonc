@@ -3,6 +3,8 @@
   "name": "belmont-best",
   "main": "src/index.ts",
   "compatibility_date": "2026-10-01",
+  "workers_dev": false,
+  "preview_urls": false,
   "routes": [
     { "pattern": "belmontcottage.co.uk/.well-known/best", "zone_name": "belmontcottage.co.uk" },
     { "pattern": "belmontcottage.co.uk/best/*", "zone_name": "belmontcottage.co.uk" },
