@@ -17,6 +17,29 @@ describe("discovery", () => {
     expect(body.best.services["uk.co.belmontcottage.booking"].authentication).toEqual({ type: "none" });
   });
 
+  it("sends an ETag and a cacheable Cache-Control on the manifest", async () => {
+    const response = await call("/.well-known/best");
+    const etag = response.headers.get("ETag");
+    expect(etag).toMatch(/^"[0-9a-f]{32}"$/);
+    expect(response.headers.get("Cache-Control")).toBe("public, max-age=300");
+    expect(response.headers.get("Access-Control-Expose-Headers")).toContain("ETag");
+    expect((await call("/.well-known/best")).headers.get("ETag")).toBe(etag);
+  });
+
+  it("answers a matching If-None-Match with 304 and no body", async () => {
+    const etag = (await call("/.well-known/best")).headers.get("ETag")!;
+    for (const ifNoneMatch of [etag, `W/${etag}`, `"other", ${etag}`, "*"]) {
+      const response = await call("/.well-known/best", { headers: { "If-None-Match": ifNoneMatch } });
+      expect(response.status).toBe(304);
+      expect(response.headers.get("ETag")).toBe(etag);
+      expect(response.headers.get("Cache-Control")).toBe("public, max-age=300");
+      expect(await response.text()).toBe("");
+    }
+    const stale = await call("/.well-known/best", { headers: { "If-None-Match": '"other"' } });
+    expect(stale.status).toBe(200);
+    expect(conformsTo(`${SPEC}/discovery.json`, await stale.json())).toEqual([]);
+  });
+
   it("keeps manifest descriptions short and free of mechanics", async () => {
     const { body } = await getJson("/.well-known/best");
     const descriptions = [

@@ -13,12 +13,13 @@ import {
   workflowIndex,
 } from "./catalogue";
 import { clientKey, submitCommand } from "./commands";
-import { error, json, preflight, schemaDocument } from "./http";
+import { cacheableJson, error, json, preflight, schemaDocument } from "./http";
 import { executeQuery } from "./queries";
 
 export { Ledger } from "./ledger";
 
 const BASE_PATH = "/best";
+const MANIFEST_MAX_AGE_SECONDS = 300;
 
 export default {
   async fetch(request, env): Promise<Response> {
@@ -51,7 +52,7 @@ async function route(request: Request, url: URL, env: Env): Promise<Response> {
   const { method } = request;
 
   if (url.pathname === "/.well-known/best") {
-    return method === "GET" ? json(manifest(endpoint)) : methodNotAllowed(["GET"]);
+    return method === "GET" ? cacheableJson(request, manifest(endpoint), MANIFEST_MAX_AGE_SECONDS) : methodNotAllowed(["GET"]);
   }
 
   if (!url.pathname.startsWith(`${BASE_PATH}/`)) return notFound(url);
