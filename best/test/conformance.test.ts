@@ -169,6 +169,37 @@ describe("http", () => {
     expect(response.headers.get("Access-Control-Allow-Origin")).toBe("*");
   });
 
+  it("answers HEAD on every GET route with the GET headers and no body", async () => {
+    const paths = [
+      "/.well-known/best",
+      "/best/commands",
+      "/best/commands/request-booking/1.0",
+      "/best/queries",
+      "/best/queries/property-description",
+      "/best/queries/property-features/1.0",
+      "/best/workflows",
+      "/best/workflows/book-a-stay",
+      "/best/nothing-here",
+    ];
+    for (const path of paths) {
+      const get = await call(path);
+      const head = await call(path, { method: "HEAD" });
+      expect(head.status, path).toBe(get.status);
+      expect(head.headers.get("Content-Type"), path).toBe(get.headers.get("Content-Type"));
+      expect(head.headers.get("ETag"), path).toBe(get.headers.get("ETag"));
+      expect(await head.text(), path).toBe("");
+    }
+    const etag = (await call("/.well-known/best")).headers.get("ETag")!;
+    expect((await call("/.well-known/best", { method: "HEAD", headers: { "If-None-Match": etag } })).status).toBe(304);
+  });
+
+  it("lists HEAD as allowed alongside GET", async () => {
+    const response = await call("/.well-known/best", { method: "POST" });
+    expect(response.status).toBe(405);
+    expect(response.headers.get("Allow")).toBe("GET, HEAD");
+    expect((await call("/best/commands", { method: "DELETE" })).headers.get("Allow")).toBe("GET, HEAD, POST");
+  });
+
   it("answers unknown routes with 404 in the error format", async () => {
     const { status, body } = await getJson("/best/nothing-here");
     expect(status).toBe(404);

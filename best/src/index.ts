@@ -23,36 +23,42 @@ const MANIFEST_MAX_AGE_SECONDS = 300;
 
 export default {
   async fetch(request, env): Promise<Response> {
-    const url = new URL(request.url);
-
-    if (url.pathname === "/booked.ics") return bookedCalendar(env);
-
-    if (request.method === "OPTIONS") return preflight();
-
-    const limited = await rateLimited(request, env);
-    if (limited) return limited;
-
-    try {
-      return await route(request, url, env);
-    } catch (cause) {
-      if (cause instanceof CalendarUnavailable) {
-        console.error(cause.message);
-        return error(503, "CALENDAR_UNAVAILABLE", "Availability cannot be checked right now. Try again shortly.", undefined, {
-          "Retry-After": "60",
-        });
-      }
-      console.error(cause);
-      return error(500, "INTERNAL_ERROR", "Something went wrong.");
-    }
+    if (request.method !== "HEAD") return handle(request, env);
+    const response = await handle(new Request(request, { method: "GET" }), env);
+    return new Response(null, response);
   },
 } satisfies ExportedHandler<Env>;
+
+async function handle(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+
+  if (url.pathname === "/booked.ics") return bookedCalendar(env);
+
+  if (request.method === "OPTIONS") return preflight();
+
+  const limited = await rateLimited(request, env);
+  if (limited) return limited;
+
+  try {
+    return await route(request, url, env);
+  } catch (cause) {
+    if (cause instanceof CalendarUnavailable) {
+      console.error(cause.message);
+      return error(503, "CALENDAR_UNAVAILABLE", "Availability cannot be checked right now. Try again shortly.", undefined, {
+        "Retry-After": "60",
+      });
+    }
+    console.error(cause);
+    return error(500, "INTERNAL_ERROR", "Something went wrong.");
+  }
+}
 
 async function route(request: Request, url: URL, env: Env): Promise<Response> {
   const endpoint = `${url.origin}${BASE_PATH}`;
   const { method } = request;
 
   if (url.pathname === "/.well-known/best") {
-    return method === "GET" ? cacheableJson(request, manifest(endpoint), MANIFEST_MAX_AGE_SECONDS) : methodNotAllowed(["GET"]);
+    return method === "GET" ? cacheableJson(request, manifest(endpoint), MANIFEST_MAX_AGE_SECONDS) : methodNotAllowed(["GET", "HEAD"]);
   }
 
   if (!url.pathname.startsWith(`${BASE_PATH}/`)) return notFound(url);
@@ -63,7 +69,7 @@ async function route(request: Request, url: URL, env: Env): Promise<Response> {
       if (segments.length === 1) {
         if (method === "GET") return json(commandCatalogue(endpoint));
         if (method === "POST") return submitCommand(request, env);
-        return methodNotAllowed(["GET", "POST"]);
+        return methodNotAllowed(["GET", "HEAD", "POST"]);
       }
       if (segments.length === 3 && method === "GET") {
         const [, schema, version] = segments;
@@ -74,7 +80,7 @@ async function route(request: Request, url: URL, env: Env): Promise<Response> {
       }
       break;
     case "queries":
-      if (method !== "GET") return methodNotAllowed(["GET"]);
+      if (method !== "GET") return methodNotAllowed(["GET", "HEAD"]);
       if (segments.length === 1) return json(queryCatalogue(endpoint));
       if (!isQueryName(segments[1])) {
         return error(404, "SCHEMA_NOT_FOUND", `Unknown query schema '${segments[1]}'.`);
@@ -86,7 +92,7 @@ async function route(request: Request, url: URL, env: Env): Promise<Response> {
       }
       break;
     case "workflows":
-      if (method !== "GET") return methodNotAllowed(["GET"]);
+      if (method !== "GET") return methodNotAllowed(["GET", "HEAD"]);
       if (segments.length === 1) return json(workflowIndex());
       if (segments.length === 2) {
         if (segments[1] === WORKFLOW_ID) return json(workflow(endpoint));
